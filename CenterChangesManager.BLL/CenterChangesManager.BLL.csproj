@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.1.66" />
+    <PackageReference Include="MailKit" Version="4.14.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CenterChangesManager.Common\CenterChangesManager.Common.csproj" />
+    <ProjectReference Include="..\CenterChangesManager.DAL\CenterChangesManager.DAL.csproj" />
+  </ItemGroup>
+
+</Project>

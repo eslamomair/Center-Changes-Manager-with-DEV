@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="CenterChangesManager.BLL/CenterChangesManager.BLL.csproj" Id="31b35dcb-620a-4d73-9b41-eb95b5c57c11" />
+  <Project Path="CenterChangesManager.Common/CenterChangesManager.Common.csproj" Id="c9f0b19e-3eda-4d2a-87cc-0206c11d31c9" />
+  <Project Path="CenterChangesManager.DAL/CenterChangesManager.DAL.csproj" Id="c1a4c765-68ff-4df4-9412-0e9a3c016e9f" />
+  <Project Path="New/CenterChangesManager.Main.csproj" />
+</Solution>
