@@ -59,15 +59,7 @@ namespace CenterChanges.ControlsCites
         }
         #endregion
 
-        #region Set Name
-        private void SetCityCard()
-        {
-            if (ucCity.IscmbVisible)
-            {
 
-            }
-        }
-        #endregion
 
         private void ucCity_isSelectedCHK(object sender, bool isChecked)
         {
@@ -174,15 +166,24 @@ namespace CenterChanges.ControlsCites
                 return;
             }
 
+            int? cityId = ucCity.SelectedId;
+            if (!cityId.HasValue || cityId <= 0)
+            {
+                XtraMessageBox.Show("من فضلك اختر المدينة أولاً", "تنبيه",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+
             clsVillage village = new clsVillage();
 
             village.DataVillage.VillageName = ucVillage.ItemTextValue.Trim();
-            village.DataVillage.CityID = ucCity.SelectedId;
+            village.DataVillage.CityID = cityId;
 
             if (village.Save())
             {
-                XtraMessageBox.Show($"{village.DataVillage.VillageName.ToString()}  تم حفظ المدينه القريه ");
-                FillVillage(ucCity.SelectedId);
+                XtraMessageBox.Show($"{village.DataVillage.VillageName.ToString()}  تم حفظ المدينه  ");
+                FillVillage((int)cityId);
             }
             else
             {
@@ -199,10 +200,21 @@ namespace CenterChanges.ControlsCites
                 return;
             }
 
+            //   للتأكد من اختيار القرية
+            int villageId = ucVillage.SelectedId;
+            if (villageId <= 0)
+            {
+                XtraMessageBox.Show("من فضلك اختر القرية أولاً", "تنبيه",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+
+
             clsDependency Dep = new clsDependency();
 
             Dep.DataDependency.DependencyName = ucDependencies.ItemTextValue;
-            Dep.DataDependency.Village_ID = ucVillage.SelectedId;
+            Dep.DataDependency.Village_ID = villageId;
 
 
 
@@ -257,6 +269,15 @@ namespace CenterChanges.ControlsCites
         private void ucVillage_OnEditButtonClick(object sender, EventArgs e)
         {
             int Id = ucVillage.SelectedId;
+            int? CityId = ucCity.SelectedId;
+
+            if (!CityId.HasValue || CityId <= 0)
+            {
+                XtraMessageBox.Show("من فضلك اختر المدينة أولاً", "تنبيه",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
 
             string CurrentText = ucVillage.SelectedDisplayText;
 
@@ -275,11 +296,11 @@ namespace CenterChanges.ControlsCites
 
 
                 village.DataVillage.VillageName = newVillage.Trim();
-
+                village.DataVillage.CityID = CityId;
                 if (village.Save())
                 {
                     XtraMessageBox.Show("تم تعديل اسم القرية بنجاح");
-                    FillCityCard();
+                    FillVillage(ucCity.SelectedId);
                 }
                 else
                 {
@@ -295,10 +316,23 @@ namespace CenterChanges.ControlsCites
         private void ucDependencies_OnEditButtonClick(object sender, EventArgs e)
         {
             int Id = ucDependencies.SelectedId;
+            int VillageId = ucVillage.SelectedId;
+
+
+
+            if (VillageId <= 0)
+            {
+                XtraMessageBox.Show("من فضلك اختر القرية أولاً", "تنبيه",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+
 
             string CurrentText = ucDependencies.SelectedDisplayText;
 
-            string NewDependencies = DevExpress.XtraEditors.XtraInputBox.Show("ادخل اسم القريه الصحيح ", "تعديل اسم القريه ", CurrentText);
+            string NewDependencies = DevExpress.XtraEditors.XtraInputBox.Show("ادخل اسم التابع الصحيح ", "تعديل اسم القريه ", CurrentText);
+
 
 
             if (!string.IsNullOrEmpty(NewDependencies) && CurrentText != NewDependencies)
@@ -312,16 +346,23 @@ namespace CenterChanges.ControlsCites
                 }
 
 
-                Depe.DataDependency.DependencyName = NewDependencies.Trim();
+                if (clsDependency.IsExist(NewDependencies))
+                {
+                    XtraMessageBox.Show("اسم التابع موجود من قبل ", "تنبيه",
+                                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
+                Depe.DataDependency.DependencyName = NewDependencies.Trim();
+                Depe.DataDependency.Village_ID = VillageId;
                 if (Depe.Save())
                 {
-                    XtraMessageBox.Show("تم تعديل اسم القرية بنجاح");
-                    FillCityCard();
+                    XtraMessageBox.Show("تم تعديل اسم التابع بنجاح");
+                    FillDependencies(VillageId);
                 }
                 else
                 {
-                    XtraMessageBox.Show("فشل تعديل اسم القرية ");
+                    XtraMessageBox.Show("فشل تعديل اسم التابع ");
                 }
 
             }
@@ -396,6 +437,9 @@ namespace CenterChanges.ControlsCites
                     XtraMessageBox.Show("تعذر عمليه الحذف ");
                 }
             }
+
+
+
         }
     }
 }

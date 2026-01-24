@@ -62,5 +62,23 @@ namespace CenterChangesManager.DAL
                 return false;
             }
         }
+
+
+        public static bool IsExist(string? DepName = null, int? DepID = null)
+        {
+
+            using (IDbConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
+            {
+                string Query = @"SELECT TOP 1 1 FROM Dependencies WHERE
+                        (@DependencyID IS NOT NULL AND DependencyID = @DependencyID) OR
+                        (@DependencyName IS NOT NULL AND DependencyName = @DependencyName);";
+
+
+                int? count = connection.ExecuteScalar<int?>(Query,
+                    new { DependencyName = DepName, DependencyID = DepID });
+
+                return count != null;
+            }
+        }
     }
 }

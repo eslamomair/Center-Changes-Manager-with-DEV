@@ -86,5 +86,10 @@ namespace CenterChangesManager.BLL
             }
             return c;
         }
+
+        public static bool IsExist(int? ID = null, string? VialgeName = null)
+        {
+            return clsVillageData.IsExist(ID, VialgeName);
+        }
     }
 }

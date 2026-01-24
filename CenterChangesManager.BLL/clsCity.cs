@@ -112,6 +112,11 @@ namespace CenterChangesManager.BLL
             return clsCityData.Delete(cityID);
         }
 
+
+        public static bool IsExists(string? CityName, int? CityId)
+        {
+            return clsCityData.IsExist(CityName, CityId);
+        }
     }
 }
 

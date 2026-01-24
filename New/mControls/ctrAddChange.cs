@@ -85,7 +85,10 @@ namespace CenterChanges
 
                 }
                 else
+                {
                     XtraMessageBox.Show("خطا فى تحميل البيانات ");
+                    return;
+                }
             }
 
 

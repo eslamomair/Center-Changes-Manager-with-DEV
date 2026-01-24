@@ -76,5 +76,10 @@ namespace CenterChangesManager.BLL
             }
             return D;
         }
+
+        public static bool IsExist(string? name = null, int? ID = null)
+        {
+            return clsDependencyData.IsExist(name, ID);
+        }
     }
 }

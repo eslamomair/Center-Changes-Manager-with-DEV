@@ -90,6 +90,23 @@ namespace CenterChangesManager.DAL
                 return connection.Execute(query, new { ID = cityID }) > 0;
             }
         }
+
+        public static bool IsExist(string? cityName = null, int? cityID = null)
+        {
+
+            using (IDbConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
+            {
+                string Query = @"SELECT TOP 1 1 FROM Cities WHERE 
+
+        (@CityID IS NOT NULL AND CityID = @CityID) OR
+
+        (@CityName IS NOT NULL AND CityName = @CityName);";
+
+                int? count = connection.ExecuteScalar<int?>(Query,
+                    new { CityName = cityName, CityID = cityID });
+
+                return count != null;
+            }
+        }
     }
 }
-

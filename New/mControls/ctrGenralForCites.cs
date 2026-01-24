@@ -136,6 +136,12 @@ namespace CenterChanges.mControls
         private void chk_CheckedChanged(object sender, EventArgs e)
         {
             isSelectedCHK?.Invoke(this, chk.Checked);
+            if (chk.Checked)
+            {
+                chk.Text = "اضافه جديد ";
+            }
+            else
+                chk.Text = "اختر من القائمه ";
             layoutControl1.Refresh();
         }
 

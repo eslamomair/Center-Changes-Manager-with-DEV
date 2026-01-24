@@ -198,7 +198,7 @@ WHERE LogID = @LogID;";
             {
                 string query = @"
                     SELECT 
-                        CityID, Village_ID, Dependency_ID, ChangeNumber,
+                        CityID, VillageID, Dependency_ID, ChangeNumber,
                         Latitude, Longitude, ChangeDate, Address,
                         LocationStatusID, OwnerName, ChangeType_ID,
                         Inspector_ID, Note, IsActive
@@ -340,7 +340,7 @@ WHERE LogID = @LogID;";
         SELECT 
             cl.LogID, cl.ChangeNumber, cl.ChangeDate,
             cl.CityID, c.CityName, 
-            cl.Village_ID, v.VillageName, 
+            cl.VillageID, v.VillageName, 
             cl.Dependency_ID AS DependencyID, d.DependencyName,
             cl.Latitude, cl.Longitude, cl.OwnerName,
             ct.TypeName AS ChangeType, 
@@ -350,7 +350,7 @@ WHERE LogID = @LogID;";
         INNER JOIN Cities c ON cl.CityID = c.CityID              -- المدينة إجبارية (INNER)
         INNER JOIN ChangeTypes ct ON cl.ChangeType_ID = ct.TypeID -- النوع إجباري (INNER)
         INNER JOIN Inspectors i ON cl.Inspector_ID = i.InspectorID -- المفتش إجباري (INNER)
-        LEFT JOIN Villages v ON cl.Village_ID = v.Village_ID       -- القرية اختيارية (LEFT)
+        LEFT JOIN Villages v ON cl.VillageID = v.VillageID       -- القرية اختيارية (LEFT)
         LEFT JOIN Dependencies d ON cl.Dependency_ID = d.DependencyID -- التبعية اختيارية (LEFT)
         LEFT JOIN LocationStatuses ls ON cl.LocationStatusID = ls.StatusID -- الحالة اختيارية (LEFT)
         WHERE cl.IsActive = 1
@@ -384,7 +384,7 @@ WHERE LogID = @LogID;";
                         c.CityName, v.VillageName, d.DependencyName, cl.OwnerName
                     FROM ChangesLog cl
                     INNER JOIN Cities c ON cl.City_ID = c.CityID
-                    INNER JOIN Villages v ON cl.Village_ID = v.Village_ID
+                    INNER JOIN Villages v ON cl.VillageID = v.VillageID
                     INNER JOIN Dependencies d ON cl.Dependency_ID = d.DependencyID
                     WHERE cl.IsActive = 1 
                       AND cl.ChangeNumber LIKE '%' + @ChangeNumber + '%'";
@@ -467,7 +467,7 @@ WHERE LogID = @LogID;";
                 cl.ChangeNumber, 
                 cl.ChangeDate,
                 cl.CityID, c.CityName, 
-                cl.Village_ID, v.VillageName, 
+                cl.VillageID, v.VillageName, 
                 cl.Dependency_ID AS DependencyID, d.DependencyName,
                 cl.Latitude, cl.Longitude, 
                 cl.OwnerName,
@@ -478,7 +478,7 @@ WHERE LogID = @LogID;";
             INNER JOIN Cities c ON cl.CityID = c.CityID
             INNER JOIN ChangeTypes ct ON cl.ChangeType_ID = ct.TypeID
             INNER JOIN Inspectors i ON cl.Inspector_ID = i.InspectorID
-            LEFT JOIN Villages v ON cl.Village_ID = v.Village_ID
+            LEFT JOIN Villages v ON cl.VillageID = v.VillageID
             LEFT JOIN Dependencies d ON cl.Dependency_ID = d.DependencyID
             LEFT JOIN LocationStatuses ls ON cl.LocationStatusID = ls.StatusID
             WHERE cl.IsActive = 1

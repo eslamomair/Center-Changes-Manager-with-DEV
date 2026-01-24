@@ -49,5 +49,18 @@ namespace CenterChanges.Genraic
 
             cmb.Properties.ShowHeader = false;
         }
+
+
+        // دي دالة جديدة بنفس الاسم بس بتقبل DataTable
+        public static void FillCombo(DevExpress.XtraEditors.LookUpEdit cmb, System.Data.DataTable data, string displayMember, string valueMember)
+        {
+            cmb.Properties.DataSource = data;
+            cmb.Properties.DisplayMember = displayMember;
+            cmb.Properties.ValueMember = valueMember;
+
+
+            cmb.Properties.PopulateColumns();
+            cmb.Properties.Columns[valueMember].Visible = false;
+        }
     }
 }
