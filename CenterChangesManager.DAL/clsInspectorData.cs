@@ -50,7 +50,17 @@ namespace CenterChangesManager.DAL
             using (IDbConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
             {
                 var result = connection.QueryFirstOrDefault("SELECT * FROM Inspectors WHERE InspectorId = @ID", new { ID = id });
-                if (result != null) { name = result.InspectorName; return true; }
+                if (result != null)
+                {
+                    // هنا التصحيح: ملء جميع البيانات
+                    name = result.InspectorName;
+
+                    // تأكد أن أسماء الأعمدة (City_ID, Phone) مطابقة لما في الداتابيز
+                    cityid = result.City_ID;
+                    phone = result.Phone;
+
+                    return true;
+                }
                 return false;
             }
         }
@@ -73,7 +83,7 @@ namespace CenterChangesManager.DAL
             {
                 string query = @"
     SELECT 
-        I.InspectorID, 
+        I.Inspector_ID, 
         I.InspectorName, 
         I.Phone, 
         C.CityName as 'City',

@@ -106,10 +106,10 @@ namespace CenterChanges
             txtLongitude.Text = Convert.ToString(_currentLog.LogData.Longitude); ;
             cmbCity.EditValue = _currentLog.LogData.CityID ?? -1;
             cmbVillage.EditValue = _currentLog.LogData.VillageID ?? -1;
-            cmbDependency.EditValue = _currentLog.LogData.DependencyID ?? -1;
-            cmbInspector.EditValue = _currentLog.LogData.InspectorID;
-            cmbChangeType.EditValue = _currentLog.LogData.ChangeTypeID;
-
+            cmbDependency.EditValue = _currentLog.LogData.Dependency_ID ?? -1;
+            cmbInspector.EditValue = _currentLog.LogData.Inspector_ID;
+            cmbChangeType.EditValue = _currentLog.LogData.ChangeType_ID;
+            cmbInspector.EditValue = _currentLog.LogData.Inspector_ID;
             dtpDataChange.EditValue = _currentLog.LogData.ChangeDate;
 
             cmbLocationStatus.EditValue = _currentLog.LogData.LocationStatusID;
@@ -137,18 +137,19 @@ namespace CenterChanges
 
             if (cmbCity.EditValue is int Q)
             {
-                clsGuiHelper.FillCombo(cmbVillage, clsVillage.GetAllVillagesByCityID(Q, true), "VillageName", "Village_ID");
+                clsGuiHelper.FillCombo(cmbVillage, clsVillage.GetAllVillagesByCityID(Q, true), "VillageName", "VillageID");
+
+                foreach (DevExpress.XtraEditors.Controls.LookUpColumnInfo col in cmbVillage.Properties.Columns)
+                {
+                    if (col.FieldName != "VillageName")
+                    {
+                        col.Visible = false;
+                    }
+                }
+
+                // 4. إخفاء الهيدر ليكون الشكل نظيفاً
+                cmbVillage.Properties.ShowHeader = false;
             }
-            cmbVillage.Properties.ForceInitialize();
-            cmbVillage.Properties.PopulateColumns();
-
-            if (cmbVillage.Properties.Columns["Village_ID"] != null)
-                cmbVillage.Properties.Columns["Village_ID"].Visible = false;
-
-
-            if (cmbVillage.Properties.Columns["City_ID"] != null)
-                cmbVillage.Properties.Columns["City_ID"].Visible = false;
-            cmbVillage.Properties.ShowHeader = false;
         }
 
 
@@ -167,10 +168,13 @@ namespace CenterChanges
 
             if (cmbVillage.EditValue is int D)
             {
-                clsGuiHelper.FillCombo(cmbDependency, clsDependency.GetAllDependenciesByVillageID(D, true), "DependencyName", "DependencyID");
+                clsGuiHelper.FillCombo(cmbDependency, clsDependency.GetAllDependenciesByVillageID(D, true), "DependencyName", "Dependency_ID");
             }
 
 
+            if (cmbDependency.Properties.Columns["Village_ID"] != null)
+                cmbDependency.Properties.Columns["Village_ID"].Visible = false;
+            cmbVillage.Properties.ShowHeader = false;
         }
 
 
@@ -207,14 +211,14 @@ namespace CenterChanges
             cmbInspector.Properties.DataSource = clsInspector.GetAllInspectorsByID(cityID);
 
             cmbInspector.Properties.DisplayMember = "InspectorName";
-            cmbInspector.Properties.ValueMember = "InspectorID";
+            cmbInspector.Properties.ValueMember = "Inspector_ID";
             cmbInspector.Properties.ForceInitialize();
             cmbInspector.Properties.PopulateColumns();
 
             cmbInspector.Properties.ShowHeader = true;
 
-            if (cmbInspector.Properties.Columns["InspectorID"] != null)
-                cmbInspector.Properties.Columns["InspectorID"].Visible = false;
+            if (cmbInspector.Properties.Columns["Inspector_ID"] != null)
+                cmbInspector.Properties.Columns["Inspector_ID"].Visible = false;
 
             if (cmbInspector.Properties.Columns["City_ID"] != null)
                 cmbInspector.Properties.Columns["City_ID"].Visible = false;
@@ -252,9 +256,9 @@ namespace CenterChanges
                 _currentLog.LogData.CityID = null;
 
             if (cmbDependency.EditValue is int DepId && DepId != -1)
-                _currentLog.LogData.DependencyID = DepId;
+                _currentLog.LogData.Dependency_ID = DepId;
             else
-                _currentLog.LogData.DependencyID = null;
+                _currentLog.LogData.Dependency_ID = null;
 
             if (cmbVillage.EditValue is int VId && VId != -1)
                 _currentLog.LogData.VillageID = VId;
@@ -262,11 +266,11 @@ namespace CenterChanges
                 _currentLog.LogData.VillageID = null;
 
             if (cmbInspector.EditValue is int Ins && Ins != -1)
-                _currentLog.LogData.InspectorID = Ins;
-            else _currentLog.LogData.InspectorID = -1;
+                _currentLog.LogData.Inspector_ID = Ins;
+            else _currentLog.LogData.Inspector_ID = -1;
 
             if (cmbChangeType.EditValue is int ChangeTypeId)
-                _currentLog.LogData.ChangeTypeID = ChangeTypeId;
+                _currentLog.LogData.ChangeType_ID = ChangeTypeId;
             else
             {
                 XtraMessageBox.Show("Critical Error: cmbChangeType value is not a valid Integer. Please contact the developer.", "System Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

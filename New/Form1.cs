@@ -110,9 +110,16 @@ namespace CenterChanges
             //throw new NotImplementedException();
         }
 
-        private void btnCitesAndVilage_Click(object sender, EventArgs e)
+        private void btnCitesAndVillage_Click(object sender, EventArgs e)
         {
             NavigateToPage(navigationPageCitcyAndVilage, "City");
+            ctrCity1.InitializeDefaultState();
+        }
+
+        private void btnEmployee_Click(object sender, EventArgs e)
+        {
+            NavigateToPage(navigationPageEmployee, "الموظفين ");
+            ctrAddEditEmployees1.LoadEmployee();
         }
     }
 }

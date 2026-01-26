@@ -76,8 +76,7 @@ namespace CenterChangesManager.DAL
         {
             using (IDbConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
             {
-                string Query = @" SELECT TOP 1 1 FROM
-    FROM Villages
+                string Query = @" SELECT TOP 1 1  FROM Villages
     WHERE 
         (@VillageID IS NOT NULL ANd VillageID  = @VillageID)
         OR

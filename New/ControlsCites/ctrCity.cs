@@ -8,7 +8,22 @@ namespace CenterChanges.ControlsCites
         public ctrCity()
         {
             InitializeComponent();
-            InitializeDefaultState();
+
+            if (System.ComponentModel.LicenseManager.UsageMode == System.ComponentModel.LicenseUsageMode.Designtime)
+            {
+                return;
+            }
+
+            try
+            {
+                InitializeDefaultState();
+            }
+            catch
+            {
+                // ولا كأن حاجة حصلت.. كمل رسم الشاشة فاضية
+            }
+
+            // InitializeDefaultState();
             layoutControlItem2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never; // القرى
             layoutControlItem3.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never; // التوابع
             layoutControlItem4.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never; // زر الحفظ العام
@@ -25,7 +40,7 @@ namespace CenterChanges.ControlsCites
             ucVillage.SelectedValueChanged += (s, e) => FillDependencies(ucVillage.SelectedId);
         }
 
-        private void InitializeDefaultState()
+        public void InitializeDefaultState()
         {
             // أ. ملء البيانات الأساسية (المدن فقط حالياً)
             FillCityCard();
@@ -55,7 +70,7 @@ namespace CenterChanges.ControlsCites
 
         private void FillDependencies(int VillageID)
         {
-            ucDependencies.FillCombo(clsDependency.GetAllDependenciesByVillageID(VillageID), "DependencyID", "DependencyName");
+            ucDependencies.FillCombo(clsDependency.GetAllDependenciesByVillageID(VillageID), "Dependency_ID", "DependencyName");
         }
         #endregion
 
@@ -134,7 +149,8 @@ namespace CenterChanges.ControlsCites
 
         private void ucCity_OnSaveClick(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(ucCity.ItemTextValue))
+            string? CurrentCity = ucCity.ItemTextValue.Trim();
+            if (string.IsNullOrEmpty(CurrentCity))
             {
                 XtraMessageBox.Show("لا يمكن حفظ بيانات فارغه ");
 
@@ -142,9 +158,17 @@ namespace CenterChanges.ControlsCites
             }
 
 
+            if (clsCity.IsExists(CityName: CurrentCity))
+            {
+
+                XtraMessageBox.Show("اسم المدينه مسجل من قبل  ");
+
+                return;
+            }
+
             clsCity city = new clsCity();
 
-            city.DataCity.CityName = ucCity.ItemTextValue;
+            city.DataCity.CityName = CurrentCity;
 
             if (city.Save())
             {
@@ -171,6 +195,14 @@ namespace CenterChanges.ControlsCites
             {
                 XtraMessageBox.Show("من فضلك اختر المدينة أولاً", "تنبيه",
                                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+
+            if (clsVillage.IsExist(VillageName: ucVillage.ItemTextValue.Trim()))
+            {
+                XtraMessageBox.Show("اسم القريه مسجل من قبل  ");
+
                 return;
             }
 
@@ -209,7 +241,12 @@ namespace CenterChanges.ControlsCites
                 return;
             }
 
+            if (clsDependency.IsExist(name: ucVillage.ItemTextValue.Trim()))
+            {
+                XtraMessageBox.Show("اسم التابع مسجل من قبل  ");
 
+                return;
+            }
 
             clsDependency Dep = new clsDependency();
 
@@ -229,6 +266,10 @@ namespace CenterChanges.ControlsCites
             }
         }
 
+
+
+
+
         private void ucCity_OnEditButtonClick(object sender, EventArgs e)
         {
             int? Id = ucCity.SelectedId;
@@ -238,11 +279,20 @@ namespace CenterChanges.ControlsCites
                 return;
             }
 
-            string CurrentName = ucCity.SelectedDisplayText;
+            string CurrentName = ucCity.SelectedDisplayText.Trim();
 
             string newCityName = DevExpress.XtraEditors.XtraInputBox.Show("ادخل الاسم الصحيح", "تعديل اسم المدينه", CurrentName);
             if (!string.IsNullOrEmpty(newCityName) && newCityName != CurrentName)
             {
+
+                if (clsCity.IsExists(CityName: newCityName))
+                {
+
+                    XtraMessageBox.Show("اسم المدينه مسجل من قبل  ");
+
+                    return;
+                }
+
                 clsCity? City = clsCity.Find(Id);
                 if (City == null)
                 {
@@ -281,7 +331,7 @@ namespace CenterChanges.ControlsCites
 
             string CurrentText = ucVillage.SelectedDisplayText;
 
-            string newVillage = DevExpress.XtraEditors.XtraInputBox.Show("ادخل اسم القريه الصحيح ", "تعديل اسم القريه ", CurrentText);
+            string newVillage = DevExpress.XtraEditors.XtraInputBox.Show("ادخل اسم القريه الصحيح ", "تعديل اسم القريه ", CurrentText).Trim();
 
 
             if (!string.IsNullOrEmpty(newVillage) && CurrentText != newVillage)
@@ -294,6 +344,12 @@ namespace CenterChanges.ControlsCites
                     return;
                 }
 
+                if (clsVillage.IsExist(VillageName: newVillage))
+                {
+                    XtraMessageBox.Show("اسم القريه مسجل من قبل  ");
+
+                    return;
+                }
 
                 village.DataVillage.VillageName = newVillage.Trim();
                 village.DataVillage.CityID = CityId;
@@ -331,7 +387,7 @@ namespace CenterChanges.ControlsCites
 
             string CurrentText = ucDependencies.SelectedDisplayText;
 
-            string NewDependencies = DevExpress.XtraEditors.XtraInputBox.Show("ادخل اسم التابع الصحيح ", "تعديل اسم القريه ", CurrentText);
+            string NewDependencies = DevExpress.XtraEditors.XtraInputBox.Show("ادخل اسم التابع الصحيح ", "تعديل اسم القريه ", CurrentText).Trim();
 
 
 
@@ -342,6 +398,14 @@ namespace CenterChanges.ControlsCites
                 if (Depe == null)
                 {
                     XtraMessageBox.Show("تعذر تعديل الاسم ", "خطا فى النظام", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                    return;
+                }
+
+
+                if (clsDependency.IsExist(name: NewDependencies))
+                {
+                    XtraMessageBox.Show("اسم التابع مسجل من قبل  ");
+
                     return;
                 }
 

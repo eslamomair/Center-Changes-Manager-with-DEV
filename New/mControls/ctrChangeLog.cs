@@ -102,7 +102,7 @@ namespace CenterChanges
 
             if (cmbVillage.EditValue is int D)
             {
-                clsGuiHelper.FillCombo(cmbDependency, clsDependency.GetAllDependenciesByVillageID(D, true), "DependencyName", "DependencyID");
+                clsGuiHelper.FillCombo(cmbDependency, clsDependency.GetAllDependenciesByVillageID(D, true), "DependencyName", "Dependency_ID");
             }
 
 
@@ -148,7 +148,7 @@ namespace CenterChanges
             {
                 if (filterString != "") filterString += " AND ";
 
-                filterString += $"[DependencyID] = {cmbDependency.EditValue}";
+                filterString += $"[Dependency_ID] = {cmbDependency.EditValue}";
             }
 
             // 3. تطبيق الفلتر على الجريد

@@ -18,7 +18,7 @@ namespace CenterChangesManager.BLL
             this.LogData.LogID = -1;
             this.LogData.CityID = -1;
             this.LogData.VillageID = -1;
-            this.LogData.DependencyID = -1;
+            this.LogData.Dependency_ID = -1;
             this.LogData.ChangeNumber = "";
             this.LogData.Latitude = 0;
             this.LogData.Longitude = 0;
@@ -26,8 +26,8 @@ namespace CenterChangesManager.BLL
             this.LogData.Address = "";
             this.LogData.LocationStatusID = -1;
             this.LogData.OwnerName = "";
-            this.LogData.ChangeTypeID = -1;
-            this.LogData.InspectorID = -1;
+            this.LogData.ChangeType_ID = -1;
+            this.LogData.Inspector_ID = -1;
             this.LogData.Note = "";
             this.LogData.CreatedBy = -1;
             this.LogData.IsActive = true;
@@ -43,7 +43,7 @@ namespace CenterChangesManager.BLL
             this.LogData.LogID = logID;
             this.LogData.CityID = cityID;
             this.LogData.VillageID = villageID;
-            this.LogData.DependencyID = dependencyID;
+            this.LogData.Dependency_ID = dependencyID;
             this.LogData.ChangeNumber = changeNumber;
             this.LogData.Latitude = latitude;
             this.LogData.Longitude = longitude;
@@ -51,8 +51,8 @@ namespace CenterChangesManager.BLL
             this.LogData.Address = address;
             this.LogData.LocationStatusID = locationStatusID;
             this.LogData.OwnerName = ownerName;
-            this.LogData.ChangeTypeID = changeTypeID;
-            this.LogData.InspectorID = inspectorID;
+            this.LogData.ChangeType_ID = changeTypeID;
+            this.LogData.Inspector_ID = inspectorID;
             this.LogData.Note = incomingDocs;
             this.LogData.IsActive = isActive;
 
@@ -146,10 +146,10 @@ namespace CenterChangesManager.BLL
         private bool _AddNew()
         {
             this.LogData.LogID = clsChangesLogData.AddNewChangesLog(
-                this.LogData.CityID, this.LogData.VillageID, this.LogData.DependencyID, this.LogData.ChangeNumber,
+                this.LogData.CityID, this.LogData.VillageID, this.LogData.Dependency_ID, this.LogData.ChangeNumber,
                 this.LogData.Latitude, this.LogData.Longitude, this.LogData.ChangeDate, this.LogData.Address,
-                this.LogData.LocationStatusID, this.LogData.OwnerName, this.LogData.ChangeTypeID,
-                this.LogData.InspectorID, this.LogData.Note, this.LogData.CreatedBy);
+                this.LogData.LocationStatusID, this.LogData.OwnerName, this.LogData.ChangeType_ID,
+                this.LogData.Inspector_ID, this.LogData.Note, this.LogData.CreatedBy);
 
             return (this.LogData.LogID != -1);
         }
@@ -157,10 +157,10 @@ namespace CenterChangesManager.BLL
         private bool _Update()
         {
             return clsChangesLogData.UpdateChangesLog(
-                this.LogData.LogID, this.LogData.CityID, this.LogData.VillageID, this.LogData.DependencyID,
+                this.LogData.LogID, this.LogData.CityID, this.LogData.VillageID, this.LogData.Dependency_ID,
                 this.LogData.ChangeNumber, this.LogData.Latitude, this.LogData.Longitude, this.LogData.ChangeDate,
                 this.LogData.Address, this.LogData.LocationStatusID, this.LogData.OwnerName,
-                this.LogData.ChangeTypeID, this.LogData.InspectorID, this.LogData.Note,
+                this.LogData.ChangeType_ID, this.LogData.Inspector_ID, this.LogData.Note,
                 this.LogData.LastModifiedBy); // نرسل المستخدم الذي قام بالتعديل
         }
 

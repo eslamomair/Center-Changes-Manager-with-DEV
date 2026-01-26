@@ -58,9 +58,21 @@ namespace CenterChanges.Genraic
             cmb.Properties.DisplayMember = displayMember;
             cmb.Properties.ValueMember = valueMember;
 
-
+            // 2. إنشاء الأعمدة بناءً على الداتا سورس
             cmb.Properties.PopulateColumns();
-            cmb.Properties.Columns[valueMember].Visible = false;
+
+            // 3. (حل المشكلة الثانية) إخفاء رؤوس الأعمدة
+            cmb.Properties.ShowHeader = false;
+
+            // 4. إخفاء عمود الـ ID (الذي هو valueMember) لكي لا يظهر للمستخدم
+            if (cmb.Properties.Columns[valueMember] != null)
+            {
+                cmb.Properties.Columns[valueMember].Visible = false;
+            }
+
+            // 5. ضبط العرض القسري (اختياري) لضمان ظهور النص
+            // هذا يضمن أن العمود الظاهر الوحيد هو الـ DisplayMember
+            cmb.Properties.ForceInitialize();
         }
     }
 }

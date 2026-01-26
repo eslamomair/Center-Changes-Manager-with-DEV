@@ -113,7 +113,7 @@ namespace CenterChangesManager.BLL
         }
 
 
-        public static bool IsExists(string? CityName, int? CityId)
+        public static bool IsExists(string? CityName = null, int? CityId = null)
         {
             return clsCityData.IsExist(CityName, CityId);
         }

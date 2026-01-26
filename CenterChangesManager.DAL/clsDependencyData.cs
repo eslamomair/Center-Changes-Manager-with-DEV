@@ -24,7 +24,7 @@ namespace CenterChangesManager.DAL
             {
                 string query = @"UPDATE Dependencies 
                                  SET DependencyName = @Name, Village_ID = @Village_ID
-                                 WHERE DependencyID = @ID";
+                                 WHERE Dependency_ID = @ID";
                 return connection.Execute(query, new { Name = depName, DependencyID = villageID, ID = depID }) > 0;
             }
         }
@@ -33,7 +33,7 @@ namespace CenterChangesManager.DAL
         {
             using (IDbConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
             {
-                string query = "DELETE FROM Dependencies WHERE DependencyID = @ID";
+                string query = "DELETE FROM Dependencies WHERE Dependency_ID = @ID";
                 return connection.Execute(query, new { ID = depID }) > 0;
             }
         }
@@ -42,7 +42,7 @@ namespace CenterChangesManager.DAL
         {
             using (IDbConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
             {
-                var reader = connection.Query<Dependency>("SELECT DependencyID, DependencyName FROM Dependencies WHERE Village_ID = @Village_ID", new { Village_ID = villageID });
+                var reader = connection.Query<Dependency>("SELECT Dependency_ID, DependencyName FROM Dependencies WHERE Village_ID = @Village_ID", new { Village_ID = villageID });
 
                 return reader.ToList();
             }
@@ -52,7 +52,7 @@ namespace CenterChangesManager.DAL
         {
             using (IDbConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
             {
-                var result = connection.QueryFirstOrDefault("SELECT * FROM Dependencies WHERE DependencyID = @ID", new { ID = depID });
+                var result = connection.QueryFirstOrDefault("SELECT * FROM Dependencies WHERE Dependency_ID = @ID", new { ID = depID });
                 if (result != null)
                 {
                     depName = result.DependencyName;
@@ -70,7 +70,7 @@ namespace CenterChangesManager.DAL
             using (IDbConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
             {
                 string Query = @"SELECT TOP 1 1 FROM Dependencies WHERE
-                        (@DependencyID IS NOT NULL AND DependencyID = @DependencyID) OR
+                        (@Dependency_ID IS NOT NULL AND Dependency_ID = @Dependency_ID) OR
                         (@DependencyName IS NOT NULL AND DependencyName = @DependencyName);";
 
 
