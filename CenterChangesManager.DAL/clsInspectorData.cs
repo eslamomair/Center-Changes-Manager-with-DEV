@@ -6,23 +6,23 @@ namespace CenterChangesManager.DAL
 {
     public class clsInspectorData
     {
-        public static int AddNew(string name, int City_ID, string Phone)
+        public static int AddNew(string name, int City_ID, string Phone, int? Village_ID)
         {
             using (IDbConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
             {
-                string query = @"INSERT INTO Inspectors (InspectorName, City_ID, Phone) 
-                                VALUES (@Name,@City_ID, @Phone);
+                string query = @"INSERT INTO Inspectors (InspectorName, City_ID, Phone,Village_ID) 
+                                VALUES (@Name,@City_ID, @Phone,@Village_ID);
                                  SELECT CAST(SCOPE_IDENTITY() as int);";
-                return connection.ExecuteScalar<int>(query, new { Name = name, City_ID = City_ID, Phone = Phone });
+                return connection.ExecuteScalar<int>(query, new { Name = name, City_ID = City_ID, Phone = Phone, Village_ID = Village_ID });
             }
         }
 
-        public static bool Update(int id, string name, int cityid, string phone)
+        public static bool Update(int id, string name, int cityid, string phone, int? Village_ID)
         {
             using (IDbConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
             {
-                string query = "UPDATE Inspectors SET InspectorName = @Name WHERE InspectorId = @ID";
-                return connection.Execute(query, new { Name = name, ID = id, City_ID = cityid, Phone = phone }) > 0;
+                string query = "UPDATE Inspectors SET InspectorName = @Name,Phone = @Phone,Village_ID=@Village_ID WHERE InspectorId = @ID";
+                return connection.Execute(query, new { Name = name, ID = id, City_ID = cityid, Phone = phone, Village_ID = Village_ID }) > 0;
             }
         }
 
@@ -45,7 +45,7 @@ namespace CenterChangesManager.DAL
             }
         }
 
-        public static bool GetInspectorInfoByID(int id, ref string name, ref int cityid, ref string phone)
+        public static bool GetInspectorInfoByID(int id, ref string name, ref int cityid, ref string phone, ref int Village_ID)
         {
             using (IDbConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
             {
@@ -58,7 +58,7 @@ namespace CenterChangesManager.DAL
                     // تأكد أن أسماء الأعمدة (City_ID, Phone) مطابقة لما في الداتابيز
                     cityid = result.City_ID;
                     phone = result.Phone;
-
+                    Village_ID = result.Village_ID;
                     return true;
                 }
                 return false;
@@ -83,7 +83,7 @@ namespace CenterChangesManager.DAL
             {
                 string query = @"
     SELECT 
-        I.Inspector_ID, 
+        I.InspectorID, 
         I.InspectorName, 
         I.Phone, 
         C.CityName as 'City',
@@ -93,6 +93,23 @@ namespace CenterChangesManager.DAL
                 var reader = connection.ExecuteReader(query);
                 DataTable dt = new DataTable();
                 dt.Load(reader);
+                return dt;
+            }
+        }
+
+
+        // ارجاع جميع الموظفين الخاصين بالمدينه 
+        public static DataTable GetVillageInspectorsByCity(int cityID)
+        {
+            using (IDbConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
+            {
+                string Query = @"
+           SELECT i.InspectorID, i.InspectorName, i.Phone, i.City_ID, i.Village_ID FROM Inspectors i WHERE 
+        i.Village_ID IS NOT NULL AND i.City_ID = @City_ID;";
+                var Reader = connection.ExecuteReader(Query, new { City_ID = cityID });
+
+                DataTable dt = new DataTable();
+                dt.Load(Reader);
                 return dt;
             }
         }

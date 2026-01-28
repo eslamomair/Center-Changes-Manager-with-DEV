@@ -5,7 +5,7 @@ namespace CenterChangesManager.Common
     public class ChangesLog
     {
         [Key]
-        public int? LogID { get; set; }          // Primary Key
+        public int LogID { get; set; }          // Primary Key
         public int? CityID { get; set; }         // معرف المدينة
         public int? VillageID { get; set; }      // معرف القرية
         public int? Dependency_ID { get; set; }   // معرف التابع
@@ -21,10 +21,10 @@ namespace CenterChangesManager.Common
 
         public int? CreatedBy { get; set; }
         public DateTime? CreatedDate { get; set; }
-        public int? LastModifiedBy { get; set; }
-        public DateTime? LastModifiedDate { get; set; }
+        public int? LastModifieBy { get; set; }
+        public DateTime? LastModifiedData { get; set; }
         public string? Note { get; set; }
-        public bool? IsActive { get; set; }
+        public bool? IsActive { get; set; } = true;
 
 
 

@@ -21,6 +21,11 @@ namespace CenterChangesManager.Main.mControls
 
         }
 
+        private void FIllVillage()
+        {
+            clsGuiHelper.FillCombo(cmbVillage, clsVillage.GetAllVillages(), "VillageName", "VillageID");
+        }
+
         private void FillDataGrid()
         {
             gridControl1.DataSource = clsInspector.GetAllIspectorandCityName();
@@ -29,6 +34,11 @@ namespace CenterChangesManager.Main.mControls
             if (gridView1.Columns["City_ID"] != null)
             {
                 gridView1.Columns["City_ID"].Visible = false;
+            }
+            // أولاً: إخفاء عمود آي دي المدينة
+            if (gridView1.Columns["Village_ID"] != null)
+            {
+                gridView1.Columns["Village_ID"].Visible = false;
             }
 
             // ثانياً: تعريب أسماء الأعمدة
@@ -48,9 +58,9 @@ namespace CenterChangesManager.Main.mControls
             }
 
 
-            if (gridView1.Columns["Inspector_ID"] != null)
+            if (gridView1.Columns["InspectorID"] != null)
             {
-                gridView1.Columns["Inspector_ID"].Visible = false;
+                gridView1.Columns["InspectorID"].Visible = false;
             }
 
         }
@@ -67,6 +77,9 @@ namespace CenterChangesManager.Main.mControls
             txtPhone.Text = string.Empty;
             FillCites();
             FillDataGrid();
+            FIllVillage();
+            cmbCity.EditValue = 1;
+
         }
 
         private void _LoadData()
@@ -82,6 +95,10 @@ namespace CenterChangesManager.Main.mControls
             txtFullName.Text = _CurrentEmployee.InspectorName;
             txtPhone.Text = _CurrentEmployee.Phone;
             cmbCity.EditValue = _CurrentEmployee.City_ID;
+            if (_CurrentEmployee.Village_ID != -1)
+            {
+                cmbVillage.EditValue = _CurrentEmployee.Village_ID;
+            }
         }
 
         public void LoadEmployee(int? ID = null)
@@ -96,6 +113,8 @@ namespace CenterChangesManager.Main.mControls
             }
 
         }
+
+
 
         private void btnSave_Click(object sender, EventArgs e)
         {
@@ -113,6 +132,14 @@ namespace CenterChangesManager.Main.mControls
 
             }
 
+            if (cmbVillage.EditValue is int villageID && villageID > 0)
+            {
+                _CurrentEmployee.Village_ID = villageID;
+            }
+            else
+            {
+                _CurrentEmployee.Village_ID = null;
+            }
 
             if (_CurrentEmployee.Save())
             {
@@ -133,7 +160,7 @@ namespace CenterChangesManager.Main.mControls
 
             if (view.FocusedRowHandle >= 0)
             {
-                int ID = Convert.ToInt32(view.GetFocusedRowCellValue("Inspector_ID"));
+                int ID = Convert.ToInt32(view.GetFocusedRowCellValue("InspectorID"));
                 _ID = ID;
                 _LoadData();
             }

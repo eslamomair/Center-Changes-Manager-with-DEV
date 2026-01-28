@@ -1,6 +1,6 @@
-﻿using Dapper;
+﻿using CenterChangesManager.Common;
+using Dapper;
 using Microsoft.Data.SqlClient;
-
 using System.Data;
 
 
@@ -19,6 +19,26 @@ namespace CenterChangesManager.DAL.Global
 
                 return connection.ExecuteScalar<int>(query);
 
+            }
+        }
+
+
+
+        public static ChangeCounts GetAllCounts()
+        {
+            using (IDbConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
+            {
+                string query = @"
+            SELECT 
+                COUNT(CASE WHEN ChangeType_ID = 1 THEN 1 END) as Legal,
+                COUNT(CASE WHEN ChangeType_ID = 2 THEN 1 END) as Illegal,
+                COUNT(CASE WHEN ChangeType_ID = 3 THEN 1 END) as Other,
+                COUNT(*) as Total
+            FROM ChangesLog 
+            WHERE IsActive = 1";
+
+                var result = connection.QueryFirstOrDefault<ChangeCounts>(query);
+                return result ?? new ChangeCounts();
             }
         }
 
@@ -46,7 +66,7 @@ namespace CenterChangesManager.DAL.Global
     COUNT(cl.LogID) AS 'Total'
 FROM ChangesLog cl
 INNER JOIN Cities c ON cl.CityID = c.CityID
-WHERE cl.Village_ID IS NULL AND cl.IsActive = 1
+WHERE cl.VillageID IS NULL AND cl.IsActive = 1
 GROUP BY c.CityName
 
 UNION ALL
@@ -63,7 +83,7 @@ SELECT
     -- الإجمالي (القرية + توابعها)
     COUNT(cl.LogID) AS 'Total'
 FROM ChangesLog cl
-INNER JOIN Villages v ON cl.Village_ID = v.Village_ID
+INNER JOIN Villages v ON cl.VillageID = v.VillageID
 WHERE cl.IsActive = 1
 GROUP BY v.VillageName
 

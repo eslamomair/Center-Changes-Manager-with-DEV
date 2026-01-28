@@ -30,8 +30,9 @@
         {
             components = new System.ComponentModel.Container();
             DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
-            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule3 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule2 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            cmbVillage = new DevExpress.XtraEditors.LookUpEdit();
             btnSave = new DevExpress.XtraEditors.SimpleButton();
             cmbCity = new DevExpress.XtraEditors.LookUpEdit();
             txtPhone = new DevExpress.XtraEditors.TextEdit();
@@ -39,6 +40,7 @@
             gridControl1 = new DevExpress.XtraGrid.GridControl();
             gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             Root = new DevExpress.XtraLayout.LayoutControlGroup();
+            dxValidationProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(components);
             layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -52,15 +54,22 @@
             item0 = new DevExpress.XtraLayout.EmptySpaceItem();
             item1 = new DevExpress.XtraLayout.EmptySpaceItem();
             item2 = new DevExpress.XtraLayout.EmptySpaceItem();
-            dxValidationProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(components);
+            item4 = new DevExpress.XtraLayout.EmptySpaceItem();
+            item5 = new DevExpress.XtraLayout.EmptySpaceItem();
+            layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
+            item6 = new DevExpress.XtraLayout.EmptySpaceItem();
+            item7 = new DevExpress.XtraLayout.EmptySpaceItem();
+            item8 = new DevExpress.XtraLayout.EmptySpaceItem();
             ((System.ComponentModel.ISupportInitialize)layoutControl1).BeginInit();
             layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)cmbVillage.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)cmbCity.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)txtPhone.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)txtFullName.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridControl1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Root).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dxValidationProvider1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem3).BeginInit();
@@ -74,11 +83,17 @@
             ((System.ComponentModel.ISupportInitialize)item0).BeginInit();
             ((System.ComponentModel.ISupportInitialize)item1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)item2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dxValidationProvider1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)item4).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)item5).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem6).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)item6).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)item7).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)item8).BeginInit();
             SuspendLayout();
             // 
             // layoutControl1
             // 
+            layoutControl1.Controls.Add(cmbVillage);
             layoutControl1.Controls.Add(btnSave);
             layoutControl1.Controls.Add(cmbCity);
             layoutControl1.Controls.Add(txtPhone);
@@ -96,13 +111,24 @@
             layoutControl1.TabIndex = 0;
             layoutControl1.Text = "layoutControl1";
             // 
+            // cmbVillage
+            // 
+            cmbVillage.Location = new Point(138, 417);
+            cmbVillage.Name = "cmbVillage";
+            cmbVillage.Properties.Appearance.Font = new Font("Segoe UI", 12F);
+            cmbVillage.Properties.Appearance.Options.UseFont = true;
+            cmbVillage.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            cmbVillage.Size = new Size(75, 36);
+            cmbVillage.StyleController = layoutControl1;
+            cmbVillage.TabIndex = 6;
+            // 
             // btnSave
             // 
             btnSave.Appearance.Font = new Font("Segoe UI", 12F);
             btnSave.Appearance.Options.UseFont = true;
-            btnSave.Location = new Point(197, 469);
+            btnSave.Location = new Point(128, 459);
             btnSave.Name = "btnSave";
-            btnSave.Size = new Size(57, 28);
+            btnSave.Size = new Size(76, 28);
             btnSave.StyleController = layoutControl1;
             btnSave.TabIndex = 5;
             btnSave.Text = "حفظ";
@@ -110,7 +136,7 @@
             // 
             // cmbCity
             // 
-            cmbCity.Location = new Point(197, 427);
+            cmbCity.Location = new Point(266, 417);
             cmbCity.Name = "cmbCity";
             cmbCity.Properties.Appearance.Font = new Font("Segoe UI", 12F);
             cmbCity.Properties.Appearance.Options.UseFont = true;
@@ -125,43 +151,47 @@
             // 
             // txtPhone
             // 
-            txtPhone.Location = new Point(197, 385);
+            txtPhone.Location = new Point(242, 375);
             txtPhone.Name = "txtPhone";
             txtPhone.Properties.Appearance.Font = new Font("Segoe UI", 12F);
             txtPhone.Properties.Appearance.Options.UseFont = true;
+            txtPhone.Properties.BeepOnError = true;
             txtPhone.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.RegExpMaskManager));
-            txtPhone.Properties.MaskSettings.Set("MaskManagerSignature", "isOptimistic=False");
-            txtPhone.Properties.UseMaskAsDisplayFormat = true;
-            txtPhone.Size = new Size(75, 36);
+            txtPhone.Properties.MaskSettings.Set("mask", "\\d{11}");
+            txtPhone.Size = new Size(99, 36);
             txtPhone.StyleController = layoutControl1;
             txtPhone.TabIndex = 3;
             // 
             // txtFullName
             // 
             txtFullName.EditValue = "";
-            txtFullName.Location = new Point(197, 343);
+            txtFullName.Location = new Point(242, 333);
             txtFullName.Name = "txtFullName";
             txtFullName.Properties.Appearance.Font = new Font("Segoe UI", 12F);
             txtFullName.Properties.Appearance.Options.UseFont = true;
-            txtFullName.Size = new Size(75, 36);
+            txtFullName.Size = new Size(99, 36);
             txtFullName.StyleController = layoutControl1;
             txtFullName.TabIndex = 2;
-            conditionValidationRule3.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
-            conditionValidationRule3.ErrorText = "يجب إدخال اسم الموظف";
-            conditionValidationRule3.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Warning;
-            dxValidationProvider1.SetValidationRule(txtFullName, conditionValidationRule3);
+            conditionValidationRule2.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule2.ErrorText = "يجب إدخال اسم الموظف";
+            conditionValidationRule2.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Warning;
+            dxValidationProvider1.SetValidationRule(txtFullName, conditionValidationRule2);
             // 
             // gridControl1
             // 
-            gridControl1.Location = new Point(94, 16);
+            gridControl1.Location = new Point(125, 16);
             gridControl1.MainView = gridView1;
             gridControl1.Name = "gridControl1";
-            gridControl1.Size = new Size(278, 321);
+            gridControl1.Size = new Size(242, 311);
             gridControl1.TabIndex = 0;
             gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView1 });
             // 
             // gridView1
             // 
+            gridView1.Appearance.HeaderPanel.Font = new Font("Segoe UI", 12F);
+            gridView1.Appearance.HeaderPanel.Options.UseFont = true;
+            gridView1.Appearance.Row.Font = new Font("Segoe UI", 11F);
+            gridView1.Appearance.Row.Options.UseFont = true;
             gridView1.GridControl = gridControl1;
             gridView1.Name = "gridView1";
             gridView1.DoubleClick += gridView1_DoubleClick;
@@ -171,7 +201,7 @@
             Root.CustomizationFormText = "Root";
             Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             Root.GroupBordersVisible = false;
-            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1, layoutControlItem2, layoutControlItem3, layoutControlItem4, emptySpaceItem1, emptySpaceItem2, emptySpaceItem3, emptySpaceItem4, emptySpaceItem5, layoutControlItem5, item0, item1, item2 });
+            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1, layoutControlItem2, layoutControlItem3, layoutControlItem4, emptySpaceItem1, emptySpaceItem2, emptySpaceItem3, emptySpaceItem4, emptySpaceItem5, layoutControlItem5, item0, item1, item2, item4, item5, layoutControlItem6, item6, item7, item8 });
             Root.Name = "Root";
             Root.Size = new Size(477, 513);
             Root.TextVisible = false;
@@ -181,115 +211,167 @@
             layoutControlItem1.Control = gridControl1;
             layoutControlItem1.ControlAlignment = ContentAlignment.TopRight;
             layoutControlItem1.CustomizationFormText = "layoutControlItem1";
-            layoutControlItem1.Location = new Point(78, 0);
+            layoutControlItem1.Location = new Point(109, 0);
             layoutControlItem1.Name = "layoutControlItem1";
-            layoutControlItem1.Size = new Size(284, 327);
+            layoutControlItem1.Size = new Size(248, 317);
             layoutControlItem1.TextVisible = false;
             // 
             // layoutControlItem2
             // 
-            layoutControlItem2.AppearanceItemCaption.Font = new Font("Segoe UI", 11F);
+            layoutControlItem2.AppearanceItemCaption.Font = new Font("Segoe UI", 12F);
             layoutControlItem2.AppearanceItemCaption.Options.UseFont = true;
             layoutControlItem2.Control = txtFullName;
             layoutControlItem2.ControlAlignment = ContentAlignment.TopRight;
             layoutControlItem2.CustomizationFormText = "الاسم";
-            layoutControlItem2.Location = new Point(181, 327);
+            layoutControlItem2.Location = new Point(226, 317);
             layoutControlItem2.Name = "layoutControlItem2";
-            layoutControlItem2.Size = new Size(181, 42);
+            layoutControlItem2.Size = new Size(205, 42);
             layoutControlItem2.Text = "الاسم";
-            layoutControlItem2.TextSize = new Size(84, 20);
+            layoutControlItem2.TextSize = new Size(84, 21);
             // 
             // layoutControlItem3
             // 
-            layoutControlItem3.AppearanceItemCaption.Font = new Font("Segoe UI", 11F);
+            layoutControlItem3.AppearanceItemCaption.Font = new Font("Segoe UI", 12F);
             layoutControlItem3.AppearanceItemCaption.Options.UseFont = true;
             layoutControlItem3.Control = txtPhone;
             layoutControlItem3.ControlAlignment = ContentAlignment.TopRight;
             layoutControlItem3.CustomizationFormText = "الهاتف";
-            layoutControlItem3.Location = new Point(181, 369);
+            layoutControlItem3.Location = new Point(226, 359);
             layoutControlItem3.Name = "layoutControlItem3";
-            layoutControlItem3.Size = new Size(181, 42);
+            layoutControlItem3.Size = new Size(205, 42);
             layoutControlItem3.Text = "الهاتف";
-            layoutControlItem3.TextSize = new Size(84, 20);
+            layoutControlItem3.TextSize = new Size(84, 21);
             // 
             // layoutControlItem4
             // 
-            layoutControlItem4.AppearanceItemCaption.Font = new Font("Segoe UI", 11F);
+            layoutControlItem4.AppearanceItemCaption.Font = new Font("Segoe UI", 12F);
             layoutControlItem4.AppearanceItemCaption.Options.UseFont = true;
             layoutControlItem4.Control = cmbCity;
             layoutControlItem4.ControlAlignment = ContentAlignment.TopRight;
             layoutControlItem4.CustomizationFormText = "البلد التابع لها";
-            layoutControlItem4.Location = new Point(181, 411);
+            layoutControlItem4.Location = new Point(250, 401);
             layoutControlItem4.Name = "layoutControlItem4";
             layoutControlItem4.Size = new Size(181, 42);
             layoutControlItem4.Text = "البلد التابع لها";
-            layoutControlItem4.TextSize = new Size(84, 20);
+            layoutControlItem4.TextSize = new Size(84, 21);
             // 
             // emptySpaceItem1
             // 
             emptySpaceItem1.CustomizationFormText = "emptySpaceItem1";
-            emptySpaceItem1.Location = new Point(244, 453);
+            emptySpaceItem1.Location = new Point(194, 443);
             emptySpaceItem1.Name = "emptySpaceItem1";
-            emptySpaceItem1.Size = new Size(118, 34);
+            emptySpaceItem1.Size = new Size(237, 34);
             // 
             // emptySpaceItem2
             // 
             emptySpaceItem2.CustomizationFormText = "emptySpaceItem2";
-            emptySpaceItem2.Location = new Point(0, 327);
+            emptySpaceItem2.Location = new Point(0, 317);
             emptySpaceItem2.Name = "emptySpaceItem2";
-            emptySpaceItem2.Size = new Size(181, 42);
+            emptySpaceItem2.Size = new Size(112, 26);
             // 
             // emptySpaceItem3
             // 
             emptySpaceItem3.CustomizationFormText = "emptySpaceItem3";
-            emptySpaceItem3.Location = new Point(0, 369);
+            emptySpaceItem3.Location = new Point(0, 343);
             emptySpaceItem3.Name = "emptySpaceItem3";
-            emptySpaceItem3.Size = new Size(181, 42);
+            emptySpaceItem3.Size = new Size(112, 26);
             // 
             // emptySpaceItem4
             // 
             emptySpaceItem4.CustomizationFormText = "emptySpaceItem4";
-            emptySpaceItem4.Location = new Point(0, 411);
+            emptySpaceItem4.Location = new Point(0, 369);
             emptySpaceItem4.Name = "emptySpaceItem4";
-            emptySpaceItem4.Size = new Size(181, 42);
+            emptySpaceItem4.Size = new Size(112, 25);
             // 
             // emptySpaceItem5
             // 
             emptySpaceItem5.CustomizationFormText = "emptySpaceItem5";
-            emptySpaceItem5.Location = new Point(0, 453);
+            emptySpaceItem5.Location = new Point(0, 394);
             emptySpaceItem5.Name = "emptySpaceItem5";
-            emptySpaceItem5.Size = new Size(181, 34);
+            emptySpaceItem5.Size = new Size(112, 93);
             // 
             // layoutControlItem5
             // 
             layoutControlItem5.Control = btnSave;
             layoutControlItem5.ControlAlignment = ContentAlignment.TopRight;
             layoutControlItem5.CustomizationFormText = "layoutControlItem5";
-            layoutControlItem5.Location = new Point(181, 453);
+            layoutControlItem5.Location = new Point(112, 443);
             layoutControlItem5.Name = "layoutControlItem5";
-            layoutControlItem5.Size = new Size(63, 34);
+            layoutControlItem5.Size = new Size(82, 34);
             layoutControlItem5.TextVisible = false;
             // 
             // item0
             // 
             item0.CustomizationFormText = "item0";
-            item0.Location = new Point(362, 0);
+            item0.Location = new Point(357, 0);
             item0.Name = "item0";
-            item0.Size = new Size(89, 327);
+            item0.Size = new Size(94, 317);
             // 
             // item1
             // 
             item1.CustomizationFormText = "item1";
             item1.Location = new Point(0, 0);
             item1.Name = "item1";
-            item1.Size = new Size(78, 327);
+            item1.Size = new Size(109, 317);
             // 
             // item2
             // 
             item2.CustomizationFormText = "item2";
-            item2.Location = new Point(362, 327);
+            item2.Location = new Point(441, 317);
             item2.Name = "item2";
-            item2.Size = new Size(89, 160);
+            item2.Size = new Size(10, 160);
+            // 
+            // item4
+            // 
+            item4.CustomizationFormText = "item4";
+            item4.Location = new Point(431, 317);
+            item4.Name = "item4";
+            item4.Size = new Size(10, 160);
+            // 
+            // item5
+            // 
+            item5.CustomizationFormText = "item5";
+            item5.Location = new Point(112, 401);
+            item5.Name = "item5";
+            item5.Size = new Size(10, 42);
+            // 
+            // layoutControlItem6
+            // 
+            layoutControlItem6.AppearanceItemCaption.Font = new Font("Segoe UI", 12F);
+            layoutControlItem6.AppearanceItemCaption.Options.UseFont = true;
+            layoutControlItem6.AppearanceItemCaptionDisabled.Font = new Font("Segoe UI", 12F);
+            layoutControlItem6.AppearanceItemCaptionDisabled.Options.UseFont = true;
+            layoutControlItem6.Control = cmbVillage;
+            layoutControlItem6.ControlAlignment = ContentAlignment.TopRight;
+            layoutControlItem6.CustomizationFormText = "القريه ";
+            layoutControlItem6.Location = new Point(122, 401);
+            layoutControlItem6.Name = "layoutControlItem6";
+            layoutControlItem6.Size = new Size(128, 42);
+            layoutControlItem6.Text = "القريه ";
+            layoutControlItem6.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
+            layoutControlItem6.TextSize = new Size(42, 21);
+            layoutControlItem6.TextToControlDistance = 5;
+            // 
+            // item6
+            // 
+            item6.CustomizationFormText = "item6";
+            item6.Location = new Point(112, 317);
+            item6.Name = "item6";
+            item6.Size = new Size(114, 42);
+            // 
+            // item7
+            // 
+            item7.CustomizationFormText = "item7";
+            item7.Location = new Point(112, 359);
+            item7.Name = "item7";
+            item7.Size = new Size(114, 42);
+            // 
+            // item8
+            // 
+            item8.CustomizationFormText = "item8";
+            item8.Location = new Point(112, 477);
+            item8.Name = "item8";
+            item8.Size = new Size(339, 10);
             // 
             // ctrAddEditEmployees
             // 
@@ -301,12 +383,14 @@
             Size = new Size(477, 513);
             ((System.ComponentModel.ISupportInitialize)layoutControl1).EndInit();
             layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)cmbVillage.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)cmbCity.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)txtPhone.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)txtFullName.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridControl1).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridView1).EndInit();
             ((System.ComponentModel.ISupportInitialize)Root).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dxValidationProvider1).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem1).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem2).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem3).EndInit();
@@ -320,7 +404,12 @@
             ((System.ComponentModel.ISupportInitialize)item0).EndInit();
             ((System.ComponentModel.ISupportInitialize)item1).EndInit();
             ((System.ComponentModel.ISupportInitialize)item2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dxValidationProvider1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)item4).EndInit();
+            ((System.ComponentModel.ISupportInitialize)item5).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem6).EndInit();
+            ((System.ComponentModel.ISupportInitialize)item6).EndInit();
+            ((System.ComponentModel.ISupportInitialize)item7).EndInit();
+            ((System.ComponentModel.ISupportInitialize)item8).EndInit();
             ResumeLayout(false);
         }
 
@@ -334,6 +423,8 @@
         private DevExpress.XtraEditors.SimpleButton btnSave;
         private DevExpress.XtraEditors.LookUpEdit cmbCity;
         private DevExpress.XtraEditors.TextEdit txtPhone;
+        private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider dxValidationProvider1;
+        private DevExpress.XtraEditors.LookUpEdit cmbVillage;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
@@ -347,6 +438,11 @@
         private DevExpress.XtraLayout.EmptySpaceItem item0;
         private DevExpress.XtraLayout.EmptySpaceItem item1;
         private DevExpress.XtraLayout.EmptySpaceItem item2;
-        private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider dxValidationProvider1;
+        private DevExpress.XtraLayout.EmptySpaceItem item4;
+        private DevExpress.XtraLayout.EmptySpaceItem item5;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
+        private DevExpress.XtraLayout.EmptySpaceItem item6;
+        private DevExpress.XtraLayout.EmptySpaceItem item7;
+        private DevExpress.XtraLayout.EmptySpaceItem item8;
     }
 }

@@ -1,5 +1,6 @@
 ﻿using CenterChangesManager.Common;
 using Dapper;
+using Dapper.Contrib.Extensions;
 using Microsoft.Data.SqlClient;
 using System.Data;
 
@@ -10,131 +11,39 @@ namespace CenterChangesManager.DAL
 
 
         // ========== إضافة سجل جديد ==========
-        public static int AddNewChangesLog(
-     int? cityID,
-     int? villageID,
-     int? dependencyID,
-     string? changeNumber,
-     decimal? latitude,
-     decimal? longitude,
-     DateTime? changeDate,
-     string? address,
-     int? locationStatusID,
-     string? ownerName,
-     int? changeTypeID,
-     int? inspectorID,
-     string? note,
-     int? createdBy)
+        public static int AddNewChangesLog(ChangesLog log)
         {
             using (IDbConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
             {
-                // 1. جملة الاستعلام (لاحظ أن الأسماء بعد @ يجب أن تطابق أسماء الباراميترات بالأسفل)
-                string query = @"
-            INSERT INTO ChangesLog (
-                CityID, Village_ID, Dependency_ID, ChangeNumber, 
-                Latitude, Longitude, ChangeDate, Address, 
-                LocationStatusID, OwnerName, ChangeType_ID, Inspector_ID, 
-                Note, CreatedBy, CreatedDate, IsActive
-            )
-            VALUES (
-                @CityID, @Village_ID, @Dependency_ID, @ChangeNumber, 
-                @Latitude, @Longitude, @ChangeDate, @Address, 
-                @LocationStatusID, @OwnerName, @ChangeType_ID, @Inspector_ID, 
-                @Note, @CreatedBy, GETDATE(), 1
-            );
-            
-            -- لاسترجاع رقم الـ ID الجديد الذي تم إنشاؤه
-            SELECT CAST(SCOPE_IDENTITY() as int);";
-
-                // 2. تجهيز الباراميترات (هنا نعالج مشكلة الـ -1)
-                var parameters = new
+                try
                 {
-                    CityID = cityID,
-                    // السطر التالي يعني: لو القيمة -1 اجعلها null (من نوع int?) وإلا ضع القيمة كما هي
-                    VillageID = (villageID == -1) ? (int?)null : villageID,
-                    Dependency_ID = (dependencyID == -1) ? (int?)null : dependencyID,
+                    // دالة Insert بترجع long، بنحولها لـ int
+                    return (int)connection.Insert(log);
+                }
+                catch (Exception ex)
+                {
 
-                    ChangeNumber = changeNumber,
-                    Latitude = latitude,
-                    Longitude = longitude,
-                    ChangeDate = changeDate,
-                    Address = address,
-
-                    // معالجة حالة الموقع أيضاً إذا كانت اختيارية
-                    LocationStatusID = (locationStatusID == -1) ? (int?)null : locationStatusID,
-
-                    OwnerName = ownerName,
-                    ChangeType_ID = changeTypeID,
-                    Inspector_ID = inspectorID,
-                    Note = note,
-                    CreatedBy = createdBy
-                };
-
-                // 3. التنفيذ
-                // QuerySingle<int> تعني: نفذ الأمر وأعد لي القيمة الأولى (التي هي الـ ID الجديد) كرقم صحيح
-                return connection.QuerySingle<int>(query, parameters);
+                    return -1; // فشل الإضافة
+                }
             }
         }
 
 
         // ========== تحديث سجل موجود ==========
-        public static bool UpdateChangesLog(
-            int? logID, int? cityID, int? villageID, int? dependencyID, string? changeNumber,
-            decimal? latitude, decimal? longitude, DateTime? changeDate, string? address,
-            int? locationStatusID, string? ownerName, int? changeTypeID, int? inspectorID,
-            string? Note, int? modifiedBy)
+        public static bool UpdateChangesLog(ChangesLog log)
         {
             using (IDbConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
             {
-                string query = @"
-                   UPDATE dbo.ChangesLog
-SET
-    Dependency_ID = @Dependency_ID,
-    CityID = @CityID,
-    VillageID = @VillageID,
-    ChangeNumber = @ChangeNumber,
-    Latitude = @Latitude,
-    Longitude = @Longitude,
-    ChangeDate = @ChangeDate,
-    Address = @Address,
-    LocationStatusID = @LocationStatusID,
-    OwnerName = @OwnerName,
-    ChangeType_ID = @ChangeType_ID,
-    Inspector_ID = @Inspector_ID,
-    Note = @Note,
-    LastModifieBy = @ModifiedBy,
-    LastModifiedData = GETDATE()
-WHERE LogID = @LogID;";
-
-                var parameters = new
-                {
-                    LogID = logID,
-                    CityID = cityID,
-                    VillageID = villageID,
-                    DependencyID = dependencyID,
-                    ChangeNumber = changeNumber,
-                    Latitude = latitude,
-                    Longitude = longitude,
-                    ChangeDate = changeDate,
-                    Address = address,
-                    LocationStatusID = locationStatusID,
-                    OwnerName = ownerName,
-                    ChangeTypeID = changeTypeID,
-                    InspectorID = inspectorID,
-                    Note = Note,
-                    ModifiedBy = modifiedBy
-                };
-
                 try
                 {
-                    int rowsAffected = connection.Execute(query, parameters);
-                    return rowsAffected > 0;
+                    // دالة Update بتحدث كل الحقول بناءً على الـ Key (LogID)
+                    return connection.Update(log);
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Error: " + ex.Message);
                     return false;
                 }
+
             }
         }
 
@@ -147,8 +56,8 @@ WHERE LogID = @LogID;";
                     UPDATE ChangesLog 
                     SET 
                         IsActive = 0,
-                        LastModifiedBy = @DeletedBy,
-                        LastModifiedDate = GETDATE()
+                        LastModifieBy = @DeletedBy,
+                        LastModifiedData = GETDATE()
                     WHERE 
                         LogID = @LogID";
 
@@ -178,7 +87,7 @@ WHERE LogID = @LogID;";
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Error: " + ex.Message);
+
                     return false;
                 }
             }
@@ -187,102 +96,32 @@ WHERE LogID = @LogID;";
         // ========== البحث بـ ID ==========
         // ملاحظة: Dapper يفضل إرجاع كائن (Object) بدلاً من ref parameters
         // ولكن تم الحفاظ على التوقيع (Signature) كما هو لعدم كسر الكود القديم
-        public static bool GetChangesLogByID(
-            int? logID, ref int? cityID, ref int? villageID, ref int? dependencyID,
-            ref string? changeNumber, ref decimal? latitude, ref decimal? longitude,
-            ref DateTime? changeDate, ref string? address, ref int? locationStatusID,
-            ref string? ownerName, ref int? changeTypeID, ref int? inspectorID,
-            ref string? Note, ref bool? isActive)
+        public static CenterChangesManager.Common.ChangesLog? GetChangesLogByID(int? logID)
         {
             using (IDbConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
             {
-                string query = @"
-                    SELECT 
-                        CityID, VillageID, Dependency_ID, ChangeNumber,
-                        Latitude, Longitude, ChangeDate, Address,
-                        LocationStatusID, OwnerName, ChangeType_ID,
-                        Inspector_ID, Note, IsActive
-                    FROM ChangesLog 
-                    WHERE LogID = @LogID";
-
-                try
-                {
-                    // جلب النتيجة كـ dynamic object
-                    var result = connection.QueryFirstOrDefault(query, new { LogID = logID });
-
-                    if (result != null)
-                    {
-                        cityID = result.CityID;
-                        villageID = result.VillageID ?? -1;
-                        dependencyID = result.Dependency_ID ?? -1;
-                        changeNumber = result.ChangeNumber;
-                        latitude = result.Latitude;
-                        longitude = result.Longitude;
-                        changeDate = result.ChangeDate;
-                        address = result.Address ?? "";
-                        locationStatusID = result.LocationStatusID;
-                        ownerName = result.OwnerName;
-                        changeTypeID = result.ChangeType_ID;
-                        inspectorID = result.Inspector_ID;
-                        Note = result.Note ?? "";
-                        isActive = result.IsActive;
-                        return true;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Error: " + ex.Message);
-                }
-                return false;
+                // هي لوحدها بتعمل SELECT * FROM ChangesLog WHERE LogID = @id
+                return connection.Get<CenterChangesManager.Common.ChangesLog>(logID);
             }
         }
 
-        public static bool GetChangesLogByChangeNumber(ref int? logID, ref int? cityID, ref int? villageID,
-            ref int? dependencyID,
-             string? changeNumber, ref decimal? latitude, ref decimal? longitude,
-            ref DateTime? changeDate, ref string? address, ref int? locationStatusID,
-            ref string? ownerName, ref int? changeTypeID, ref int? inspectorID,
-            ref string? incomingDocs, ref bool? isActive)
+        public static CenterChangesManager.Common.ChangesLog? GetChangesLogByChangeNumber(string? changeNumber)
         {
             using (IDbConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
             {
-                string query = @"
-                    SELECT 
-                       LogID, City_ID, Village_ID, Dependency_ID, ChangeNumber,
-                        Latitude, Longitude, ChangeDate, Address,
-                        LocationStatusID, OwnerName, ChangeType_ID,
-                        Inspector_ID, Note, IsActive
-                    FROM ChangesLog 
-                    WHERE ChangeNumber = @ChangeNumber";
+                // هنا نحتاج SQL لأننا لا نبحث بالـ ID
+                string query = "SELECT * FROM ChangesLog WHERE ChangeNumber = @ChangeNumber";
+
                 try
                 {
-                    // جلب النتيجة كـ dynamic object
-                    var result = connection.QueryFirstOrDefault(query, new { ChangeNumber = changeNumber });
-                    if (result != null)
-                    {
-                        logID = result.LogID;
-                        cityID = result.City_ID;
-                        villageID = result.Village_ID;
-                        dependencyID = result.Dependency_ID;
-                        changeNumber = result.ChangeNumber;
-                        latitude = result.Latitude;
-                        longitude = result.Longitude;
-                        changeDate = result.ChangeDate;
-                        address = result.Address ?? "";
-                        locationStatusID = result.LocationStatusID;
-                        ownerName = result.OwnerName;
-                        changeTypeID = result.ChangeType_ID;
-                        inspectorID = result.Inspector_ID;
-                        incomingDocs = result.IncomingDocs ?? "";
-                        isActive = result.IsActive;
-                        return true;
-                    }
+                    // Dapper العادي هيملأ الاوبجكت لوحده لأن الأسماء متطابقة
+                    return connection.QueryFirstOrDefault<ChangesLog>(query, new { ChangeNumber = changeNumber });
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Error: " + ex.Message);
+
+                    return null;
                 }
-                return false;
             }
         }
 
@@ -345,13 +184,13 @@ WHERE LogID = @LogID;";
             cl.Latitude, cl.Longitude, cl.OwnerName,
             ct.TypeName AS ChangeType, 
             i.InspectorName,
-            ls.StatusName AS LocationStatus
+            ls.StatusName AS LocationStatus ,cl.Note
         FROM ChangesLog cl
         INNER JOIN Cities c ON cl.CityID = c.CityID              -- المدينة إجبارية (INNER)
         INNER JOIN ChangeTypes ct ON cl.ChangeType_ID = ct.TypeID -- النوع إجباري (INNER)
-        INNER JOIN Inspectors i ON cl.Inspector_ID = i.Inspector_ID -- المفتش إجباري (INNER)
+        INNER JOIN Inspectors i ON cl.Inspector_ID = i.InspectorID -- المفتش إجباري (INNER)
         LEFT JOIN Villages v ON cl.VillageID = v.VillageID       -- القرية اختيارية (LEFT)
-        LEFT JOIN Dependencies d ON cl.Dependency_ID = d.Dependency_ID -- التبعية اختيارية (LEFT)
+        LEFT JOIN Dependencies d ON cl.Dependency_ID = d.DependencyID -- التبعية اختيارية (LEFT)
         LEFT JOIN LocationStatuses ls ON cl.LocationStatusID = ls.StatusID -- الحالة اختيارية (LEFT)
         WHERE cl.IsActive = 1
         ORDER BY cl.ChangeDate DESC";

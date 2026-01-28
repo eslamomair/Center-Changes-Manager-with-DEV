@@ -37,6 +37,12 @@ namespace CenterChangesManager.BLL.Global
         }
 
 
+        public static Common.ChangeCounts LoadCount()
+        {
+
+            return clsServesData.GetAllCounts();
+        }
+
 
         public static async Task<bool> SendOtpEmailAsync(string targetEmail, string otpCode)
         {

@@ -168,7 +168,7 @@ namespace CenterChanges
 
             if (cmbVillage.EditValue is int D)
             {
-                clsGuiHelper.FillCombo(cmbDependency, clsDependency.GetAllDependenciesByVillageID(D, true), "DependencyName", "Dependency_ID");
+                clsGuiHelper.FillCombo(cmbDependency, clsDependency.GetAllDependenciesByVillageID(D, true), "DependencyName", "DependencyID");
             }
 
 
@@ -207,28 +207,41 @@ namespace CenterChanges
 
         private void FillInspectors(int cityID)
         {
-            // نتأكد إننا عملنا using CenterChangesManager.BLL; فوق
+
+            // 1. ربط البيانات
             cmbInspector.Properties.DataSource = clsInspector.GetAllInspectorsByID(cityID);
 
+            // 2. تحديد ما يظهر وما يخزن
+            // تأكد أن Inspector_ID هو الاسم الصحيح في الداتابيز بالحرف
             cmbInspector.Properties.DisplayMember = "InspectorName";
-            cmbInspector.Properties.ValueMember = "Inspector_ID";
-            cmbInspector.Properties.ForceInitialize();
-            cmbInspector.Properties.PopulateColumns();
+            cmbInspector.Properties.ValueMember = "InspectorID";
 
+            // 3. خطوة حاسمة: إجبار البرنامج على إنشاء الأعمدة الآن
+            cmbInspector.Properties.ForceInitialize();
+            cmbInspector.Properties.PopulateColumns(); // <--- مكانها الصحيح هنا!
+
+            // 4. الآن نعدل على الأعمدة (لأنها أصبحت موجودة فعلاً)
             cmbInspector.Properties.ShowHeader = true;
 
-            if (cmbInspector.Properties.Columns["Inspector_ID"] != null)
-                cmbInspector.Properties.Columns["Inspector_ID"].Visible = false;
-
-            if (cmbInspector.Properties.Columns["City_ID"] != null)
-                cmbInspector.Properties.Columns["City_ID"].Visible = false;
-
-            // ج: تغيير اسم عمود الاسم
-            if (cmbInspector.Properties.Columns["InspectorName"] != null)
-                cmbInspector.Properties.Columns["InspectorName"].Caption = "الاسم";
-
-            if (cmbInspector.Properties.Columns["Phone"] != null)
-                cmbInspector.Properties.Columns["Phone"].Caption = "رقم التليفون";
+            // استخدام طريقة اللوب (الجوكر) عشان نضمن إخفاء أي عمود زيادة
+            foreach (DevExpress.XtraEditors.Controls.LookUpColumnInfo col in cmbInspector.Properties.Columns)
+            {
+                if (col.FieldName == "InspectorName")
+                {
+                    col.Caption = "الاسم";
+                    col.Visible = true;
+                }
+                else if (col.FieldName == "Phone")
+                {
+                    col.Caption = "رقم التليفون";
+                    col.Visible = true;
+                }
+                else
+                {
+                    // أي عمود آخر (ID, CityID, إلخ) سيتم إخفاؤه
+                    col.Visible = false;
+                }
+            }
         }
 
         #endregion
@@ -236,7 +249,7 @@ namespace CenterChanges
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (!ValidateChildren())
+            if (!dxValidationProvider1.Validate())
                 return;
 
             _currentLog.LogData.Address = txtAdress.Text.Trim();
@@ -284,7 +297,7 @@ namespace CenterChanges
                 _currentLog.LogData.CreatedBy = 1; // افتكر غيرها 
             }
             else
-                _currentLog.LogData.LastModifiedBy = 1;
+                _currentLog.LogData.LastModifieBy = 1;
 
             if (cmbLocationStatus.EditValue is int LocId)
                 _currentLog.LogData.LocationStatusID = LocId;
@@ -308,6 +321,8 @@ namespace CenterChanges
                 {
                     XtraMessageBox.Show($"تم حفظ المتغير {_currentLog.LogData.LogID} بنجاح ");
                 }
+
+                ResetDefault();
             }
             else
             {

@@ -45,6 +45,7 @@
             navigationPageEmployee = new DevExpress.XtraBars.Navigation.NavigationPage();
             ctrAddEditEmployees1 = new CenterChangesManager.Main.mControls.ctrAddEditEmployees();
             navigationPageCitcyAndVilage = new DevExpress.XtraBars.Navigation.NavigationPage();
+            ctrCity1 = new CenterChanges.ControlsCites.ctrCity();
             navigationPage10 = new DevExpress.XtraBars.Navigation.NavigationPage();
             pnlHeader = new DevExpress.XtraEditors.PanelControl();
             lblHeaderTitle = new DevExpress.XtraEditors.LabelControl();
@@ -67,10 +68,11 @@
             accordionControlElement2 = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             accordionControlElement6 = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             accordionControlElement7 = new DevExpress.XtraBars.Navigation.AccordionControlElement();
-            ctrCity1 = new CenterChanges.ControlsCites.ctrCity();
+            ctrDashboardChanges1 = new CenterChangesManager.Main.DSHBO.ctrDashboardChanges();
             fluentContainerMaster.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)navigationFrame1).BeginInit();
             navigationFrame1.SuspendLayout();
+            navigationPageHome.SuspendLayout();
             navigationPageVariablesLog.SuspendLayout();
             navigationPageAddVariable.SuspendLayout();
             navigationPageEditVariable.SuspendLayout();
@@ -123,6 +125,7 @@
             // 
             // navigationPageHome
             // 
+            navigationPageHome.Controls.Add(ctrDashboardChanges1);
             navigationPageHome.Name = "navigationPageHome";
             navigationPageHome.Size = new Size(933, 548);
             // 
@@ -218,6 +221,14 @@
             navigationPageCitcyAndVilage.Controls.Add(ctrCity1);
             navigationPageCitcyAndVilage.Name = "navigationPageCitcyAndVilage";
             navigationPageCitcyAndVilage.Size = new Size(933, 548);
+            // 
+            // ctrCity1
+            // 
+            ctrCity1.Dock = DockStyle.Right;
+            ctrCity1.Location = new Point(430, 0);
+            ctrCity1.Name = "ctrCity1";
+            ctrCity1.Size = new Size(503, 548);
+            ctrCity1.TabIndex = 0;
             // 
             // navigationPage10
             // 
@@ -395,13 +406,14 @@
             accordionControlElement7.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
             accordionControlElement7.Text = "Element7";
             // 
-            // ctrCity1
+            // ctrDashboardChanges1
             // 
-            ctrCity1.Dock = DockStyle.Right;
-            ctrCity1.Location = new Point(430, 0);
-            ctrCity1.Name = "ctrCity1";
-            ctrCity1.Size = new Size(503, 548);
-            ctrCity1.TabIndex = 0;
+            ctrDashboardChanges1.Dock = DockStyle.Fill;
+            ctrDashboardChanges1.Location = new Point(0, 0);
+            ctrDashboardChanges1.Name = "ctrDashboardChanges1";
+            ctrDashboardChanges1.RightToLeft = RightToLeft.Yes;
+            ctrDashboardChanges1.Size = new Size(933, 548);
+            ctrDashboardChanges1.TabIndex = 0;
             // 
             // frmMain
             // 
@@ -425,6 +437,7 @@
             fluentContainerMaster.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)navigationFrame1).EndInit();
             navigationFrame1.ResumeLayout(false);
+            navigationPageHome.ResumeLayout(false);
             navigationPageVariablesLog.ResumeLayout(false);
             navigationPageAddVariable.ResumeLayout(false);
             navigationPageEditVariable.ResumeLayout(false);
@@ -481,6 +494,7 @@
      
         private CenterChangesManager.Main.mControls.ctrAddEditEmployees ctrAddEditEmployees1;
         private ControlsCites.ctrCity ctrCity1;
+        private CenterChangesManager.Main.DSHBO.ctrDashboardChanges ctrDashboardChanges1;
     }
 }
 

@@ -9,52 +9,20 @@ namespace CenterChangesManager.BLL
         public enum enMode { AddNew = 0, Update = 1 }
         public enMode Mode = enMode.AddNew;
 
-        public ChangesLog? LogData { get; set; } = new ChangesLog();
+        public ChangesLog? LogData { get; set; }
 
         // المشيد الافتراضي (لإضافة سجل جديد)
         public clsChangesLog()
         {
 
-            this.LogData.LogID = -1;
-            this.LogData.CityID = -1;
-            this.LogData.VillageID = -1;
-            this.LogData.Dependency_ID = -1;
-            this.LogData.ChangeNumber = "";
-            this.LogData.Latitude = 0;
-            this.LogData.Longitude = 0;
-            this.LogData.ChangeDate = DateTime.Now;
-            this.LogData.Address = "";
-            this.LogData.LocationStatusID = -1;
-            this.LogData.OwnerName = "";
-            this.LogData.ChangeType_ID = -1;
-            this.LogData.Inspector_ID = -1;
-            this.LogData.Note = "";
-            this.LogData.CreatedBy = -1;
-            this.LogData.IsActive = true;
+            this.LogData = new ChangesLog();
             this.Mode = enMode.AddNew;
         }
 
         // مشيد خاص (يستخدم داخلياً عند البحث Find)
-        private clsChangesLog(int? logID, int? cityID, int? villageID, int? dependencyID,
-            string? changeNumber, decimal? latitude, decimal? longitude, DateTime? changeDate,
-            string? address, int? locationStatusID, string? ownerName, int? changeTypeID,
-            int? inspectorID, string? incomingDocs, bool? isActive)
+        private clsChangesLog(ChangesLog logObj)
         {
-            this.LogData.LogID = logID;
-            this.LogData.CityID = cityID;
-            this.LogData.VillageID = villageID;
-            this.LogData.Dependency_ID = dependencyID;
-            this.LogData.ChangeNumber = changeNumber;
-            this.LogData.Latitude = latitude;
-            this.LogData.Longitude = longitude;
-            this.LogData.ChangeDate = changeDate;
-            this.LogData.Address = address;
-            this.LogData.LocationStatusID = locationStatusID;
-            this.LogData.OwnerName = ownerName;
-            this.LogData.ChangeType_ID = changeTypeID;
-            this.LogData.Inspector_ID = inspectorID;
-            this.LogData.Note = incomingDocs;
-            this.LogData.IsActive = isActive;
+            this.LogData = logObj;
 
             // بما أن البيانات جاءت من قاعدة البيانات، فالوضع هو Update
             this.Mode = enMode.Update;
@@ -65,24 +33,12 @@ namespace CenterChangesManager.BLL
         // ==========================================
         public static clsChangesLog? Find(int? LogID)
         {
-            // تعريف المتغيرات لاستقبال البيانات من الـ ref parameters
-            int? cityID = -1, villageID = -1, dependencyID = -1;
-            string? changeNumber = "";
-            decimal? latitude = 0, longitude = 0;
-            DateTime? changeDate = DateTime.Now;
-            string? address = "", ownerName = "", Note = "";
-            int? locationStatusID = -1, changeTypeID = -1, inspectorID = -1;
-            bool? isActive = false;
 
-            if (clsChangesLogData.GetChangesLogByID(LogID, ref cityID, ref villageID, ref dependencyID,
-                ref changeNumber, ref latitude, ref longitude, ref changeDate, ref address,
-                ref locationStatusID, ref ownerName, ref changeTypeID, ref inspectorID,
-                ref Note, ref isActive))
+            ChangesLog? foundLog = clsChangesLogData.GetChangesLogByID(LogID);
+            if (foundLog != null)
             {
                 // إرجاع كائن معبأ بالبيانات
-                return new clsChangesLog(LogID, cityID, villageID, dependencyID, changeNumber,
-                    latitude, longitude, changeDate, address, locationStatusID, ownerName,
-                    changeTypeID, inspectorID, Note, isActive);
+                return new clsChangesLog(foundLog);
             }
             else
             {
@@ -92,24 +48,12 @@ namespace CenterChangesManager.BLL
 
         public static clsChangesLog? Find(string? ChangeNumber)
         {
-            // تعريف المتغيرات لاستقبال البيانات من الـ ref parameters
-            int? cityID = -1, villageID = -1, dependencyID = -1;
-            int? LogID = 0;
-            decimal? latitude = 0, longitude = 0;
-            DateTime? changeDate = DateTime.Now;
-            string? address = "", ownerName = "", incomingDocs = "";
-            int? locationStatusID = -1, changeTypeID = -1, inspectorID = -1;
-            bool? isActive = false;
+            ChangesLog? log = clsChangesLogData.GetChangesLogByChangeNumber(ChangeNumber);
 
-            if (clsChangesLogData.GetChangesLogByChangeNumber(ref LogID, ref cityID, ref villageID, ref dependencyID,
-                 ChangeNumber, ref latitude, ref longitude, ref changeDate, ref address,
-                ref locationStatusID, ref ownerName, ref changeTypeID, ref inspectorID,
-                ref incomingDocs, ref isActive))
+            if (log != null)
             {
                 // إرجاع كائن معبأ بالبيانات
-                return new clsChangesLog(LogID, cityID, villageID, dependencyID, ChangeNumber,
-                    latitude, longitude, changeDate, address, locationStatusID, ownerName,
-                    changeTypeID, inspectorID, incomingDocs, isActive);
+                return new clsChangesLog(log);
             }
             else
             {
@@ -145,23 +89,14 @@ namespace CenterChangesManager.BLL
 
         private bool _AddNew()
         {
-            this.LogData.LogID = clsChangesLogData.AddNewChangesLog(
-                this.LogData.CityID, this.LogData.VillageID, this.LogData.Dependency_ID, this.LogData.ChangeNumber,
-                this.LogData.Latitude, this.LogData.Longitude, this.LogData.ChangeDate, this.LogData.Address,
-                this.LogData.LocationStatusID, this.LogData.OwnerName, this.LogData.ChangeType_ID,
-                this.LogData.Inspector_ID, this.LogData.Note, this.LogData.CreatedBy);
+            this.LogData.LogID = clsChangesLogData.AddNewChangesLog(this.LogData);
 
             return (this.LogData.LogID != -1);
         }
 
         private bool _Update()
         {
-            return clsChangesLogData.UpdateChangesLog(
-                this.LogData.LogID, this.LogData.CityID, this.LogData.VillageID, this.LogData.Dependency_ID,
-                this.LogData.ChangeNumber, this.LogData.Latitude, this.LogData.Longitude, this.LogData.ChangeDate,
-                this.LogData.Address, this.LogData.LocationStatusID, this.LogData.OwnerName,
-                this.LogData.ChangeType_ID, this.LogData.Inspector_ID, this.LogData.Note,
-                this.LogData.LastModifiedBy); // نرسل المستخدم الذي قام بالتعديل
+            return clsChangesLogData.UpdateChangesLog(this.LogData);
         }
 
         // ==========================================
