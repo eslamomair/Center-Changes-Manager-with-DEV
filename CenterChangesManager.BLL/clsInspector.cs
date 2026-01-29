@@ -79,6 +79,7 @@ namespace CenterChangesManager.BLL
             return clsInspectorData.GetAllInspectorsByCityID(CityID);
         }
 
+        [Obsolete]
         public static DataTable GetAllIspectorandCityName()
         {
             return clsInspectorData.GetIspectorAndCity();
@@ -91,5 +92,11 @@ namespace CenterChangesManager.BLL
             return clsInspectorData.GetVillageInspectorsByCity(cityid);
         }
 
+
+        /// ارجاع جميع الموظفين مع المدينه 
+        public static DataTable GetInspectorWithCity()
+        {
+            return clsInspectorData.GetInspectorWithCity();
+        }
     }
 }

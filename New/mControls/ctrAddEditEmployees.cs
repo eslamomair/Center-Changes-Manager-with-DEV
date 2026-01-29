@@ -28,7 +28,7 @@ namespace CenterChangesManager.Main.mControls
 
         private void FillDataGrid()
         {
-            gridControl1.DataSource = clsInspector.GetAllIspectorandCityName();
+            gridControl1.DataSource = clsInspector.GetInspectorWithCity();
 
             // أولاً: إخفاء عمود آي دي المدينة
             if (gridView1.Columns["City_ID"] != null)

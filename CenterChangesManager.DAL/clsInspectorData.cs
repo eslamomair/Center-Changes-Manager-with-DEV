@@ -77,6 +77,33 @@ namespace CenterChangesManager.DAL
             }
         }
 
+        /// <summary>
+        /// ارجاع اسماء الموظفين ، كل موظف مع المدينه الخاصه به 
+        /// </summary>
+        /// <returns></returns>
+        public static DataTable GetInspectorWithCity()
+        {
+            using (IDbConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
+            {
+                string Query = @"SELECT i.InspectorID, i.InspectorName, i.Phone, i.City_ID, i.Village_ID,
+ISNULL(v.VillageName,c.CityName) AS 'City'  FROM Inspectors i
+LEFT JOIN Cities c ON i.City_ID = c.CityID
+LEFT JOIN Villages v ON i.Village_ID = v.VillageID 
+
+";
+                var Result = connection.ExecuteReader(Query);
+                DataTable dt = new DataTable();
+                dt.Load(Result);
+                return dt;
+            }
+        }
+
+
+
+        [Obsolete]
+        ///     
+        /// Old Fun
+        /// 
         public static DataTable GetIspectorAndCity()
         {
             using (IDbConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))

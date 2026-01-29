@@ -12,8 +12,8 @@ namespace CenterChanges
 
         public frmMain()
         {
-            InitializeComponent();
 
+            InitializeComponent();
         }
 
 
@@ -120,6 +120,11 @@ namespace CenterChanges
         {
             NavigateToPage(navigationPageEmployee, "الموظفين ");
             ctrAddEditEmployees1.LoadEmployee();
+        }
+
+        private void accordionControlElement13_Click(object sender, EventArgs e)
+        {
+            NavigateToPage(navigationCompanyInfo, "اعداد بيانات الجهة ");
         }
     }
 }
