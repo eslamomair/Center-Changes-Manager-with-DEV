@@ -14,6 +14,7 @@ namespace CenterChanges
         {
 
             InitializeComponent();
+            btnHome_Click(null, null);
         }
 
 
@@ -36,6 +37,7 @@ namespace CenterChanges
         private void btnHome_Click(object sender, EventArgs e)
         {
             NavigateToPage(navigationPageHome, "اداره المتغيرات المكانية", "الصفحه الرئيسية");
+            ctrDashboardChanges1.LoadControl();
         }
 
         private void btnChangeLog_Click(object sender, EventArgs e)

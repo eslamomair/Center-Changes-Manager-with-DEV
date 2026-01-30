@@ -20,7 +20,7 @@ namespace CenterChangesManager.Main.DSHBO
             InitializeComponent();
 
 
-            Maps();
+            //  Maps();
 
         }
         private void Provider_WebRequest(object sender, MapWebRequestEventArgs e)
@@ -119,7 +119,7 @@ namespace CenterChangesManager.Main.DSHBO
 
             // 4. (إضافي) وضع دبوس مكان الضغطة عشان تبقى شايف المكان
             AddMarkerAt(geoPoint);
-            LoadChartData();
+            //LoadChartData();
         }
 
 
@@ -234,7 +234,7 @@ namespace CenterChangesManager.Main.DSHBO
                 view.BarWidth = 0.6; // عرض العمود
                 view.Border.Visibility = DevExpress.Utils.DefaultBoolean.False; // إخفاء البرواز الأسود
                 view.ColorEach = true; // تفعيل تعدد الألوان
-                LoadCountsAsync();
+
             }
             catch (Exception ex)
             {
@@ -262,6 +262,14 @@ namespace CenterChangesManager.Main.DSHBO
             {
 
             }
+        }
+
+        public void LoadControl()
+        {
+
+            Maps();
+            LoadCountsAsync();
+            LoadChartData();
         }
     }
 }

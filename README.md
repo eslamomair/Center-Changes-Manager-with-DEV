@@ -5,6 +5,14 @@
 ![Language](https://img.shields.io/badge/Language-C%23-blue)
 ![UI Framework](https://img.shields.io/badge/UI-DevExpress-orange)
 
+## 🖥️ Main Dashboard
+
+The main dashboard provides an overview of spatial changes and system statistics,
+including categorized counts and geographic visualization.
+
+![Main Dashboard](screenshots/main-dashboard.png)
+
+
 ## 📄 Project Description
 **Center Changes Manager** is a specialized desktop application designed to streamline the monitoring and recording of spatial variables within a specific jurisdiction. It serves as a central hub for administrative departments to track land changes, verify legal status, and document inspection results efficiently.
 
