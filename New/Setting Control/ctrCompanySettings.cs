@@ -1,6 +1,9 @@
 ﻿using CenterChangesManager.BLL.Global;
 using DevExpress.XtraEditors;
+using DevExpress.XtraEditors.DXErrorProvider;
+using System.Drawing.Imaging;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace CenterChangesManager.Main.Setting_Control
 {
@@ -84,7 +87,7 @@ namespace CenterChangesManager.Main.Setting_Control
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (true)
+            if (!dxValidationProvider1.Validate())
             {
                 return;
             }
@@ -101,14 +104,13 @@ namespace CenterChangesManager.Main.Setting_Control
             if (pbOrgLogo.Image != null)
             {
 
-
                 using (MemoryStream ms = new MemoryStream())
                 {
-
-                    pbOrgLogo.Image.Save(ms, pbOrgLogo.Image.RawFormat);
-
+                    using (Bitmap bmp = new Bitmap(pbOrgLogo.Image))
+                    {
+                        bmp.Save(ms, ImageFormat.Png); // ثبات أفضل من RawFormat
+                    }
                     Organization.Org.OrgLogo = ms.ToArray();
-
                 }
 
             }
@@ -140,15 +142,72 @@ namespace CenterChangesManager.Main.Setting_Control
         {
             using (XtraOpenFileDialog df = new XtraOpenFileDialog())
             {
-
                 df.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp";
-                if (df.ShowDialog() == DialogResult.OK)
+
+                if (df.ShowDialog() != DialogResult.OK)
+                    return;
+
+                try
                 {
-                    pbOrgLogo.Image = Image.FromFile(df.FileName);
-                }
-                else
+                    pbOrgLogo.Image?.Dispose();
                     pbOrgLogo.Image = null;
+
+                    byte[] bytes = File.ReadAllBytes(df.FileName);
+
+                    using (MemoryStream ms = new MemoryStream(bytes))
+                    {
+                        using (Bitmap bmp = new Bitmap(ms))
+                        {
+                            pbOrgLogo.Image = new Bitmap(bmp);
+                        }
+                    }
+                }
+                catch (ArgumentException)
+                {
+                    XtraMessageBox.Show(
+                        "الملف المختار ليس صورة مدعومة.\nيرجى اختيار صورة JPG أو PNG حقيقية.",
+                        "خطأ",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error
+                    );
+                }
+                catch (Exception ex)
+                {
+                    XtraMessageBox.Show(ex.Message);
+                }
             }
+        }
+
+        private void txtEmailAddress_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            DXErrorProvider dxErrorProvider1 = new DXErrorProvider();
+            if (!IsEmailValid())
+            {
+                e.Cancel = true;
+                dxErrorProvider1.SetError(
+                    txtEmailAddress,
+                    "صيغة البريد الإلكتروني غير صحيحة",
+                    ErrorType.Critical
+                );
+            }
+            else
+            {
+                dxErrorProvider1.ClearErrors();
+            }
+        }
+
+        public bool IsEmailValid()
+        {
+            return Regex.IsMatch(
+                txtEmailAddress.Text,
+                @"^[^@\s]+@[^@\s]+\.[^@\s]+$"
+            );
+        }
+
+        public string Email
+        {
+            get => txtEmailAddress.Text;
+            set => txtEmailAddress.Text = value;
         }
     }
 }

@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
+            DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule conditionValidationRule1 = new DevExpress.XtraEditors.DXErrorProvider.ConditionValidationRule();
             layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             txtEmailAddress = new DevExpress.XtraEditors.TextEdit();
             txtPhoneNumber = new DevExpress.XtraEditors.TextEdit();
@@ -75,6 +77,7 @@
             emptySpaceItem15 = new DevExpress.XtraLayout.EmptySpaceItem();
             emptySpaceItem17 = new DevExpress.XtraLayout.EmptySpaceItem();
             emptySpaceItem18 = new DevExpress.XtraLayout.EmptySpaceItem();
+            dxValidationProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(components);
             ((System.ComponentModel.ISupportInitialize)layoutControl1).BeginInit();
             layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)txtEmailAddress.Properties).BeginInit();
@@ -120,6 +123,7 @@
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem15).BeginInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem17).BeginInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem18).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dxValidationProvider1).BeginInit();
             SuspendLayout();
             // 
             // layoutControl1
@@ -155,6 +159,11 @@
             txtEmailAddress.Size = new Size(226, 36);
             txtEmailAddress.StyleController = layoutControl1;
             txtEmailAddress.TabIndex = 12;
+            conditionValidationRule1.ConditionOperator = DevExpress.XtraEditors.DXErrorProvider.ConditionOperator.IsNotBlank;
+            conditionValidationRule1.ErrorText = "البريد الإلكتروني مطلوب";
+            conditionValidationRule1.ErrorType = DevExpress.XtraEditors.DXErrorProvider.ErrorType.Information;
+            dxValidationProvider1.SetValidationRule(txtEmailAddress, conditionValidationRule1);
+            txtEmailAddress.Validating += txtEmailAddress_Validating;
             // 
             // txtPhoneNumber
             // 
@@ -609,6 +618,7 @@
             // 
             AutoScaleDimensions = new SizeF(6F, 13F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoValidate = AutoValidate.EnableAllowFocusChange;
             Controls.Add(layoutControl1);
             Name = "ctrCompanySettings";
             RightToLeft = RightToLeft.Yes;
@@ -658,6 +668,7 @@
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem15).EndInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem17).EndInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem18).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dxValidationProvider1).EndInit();
             ResumeLayout(false);
         }
 
@@ -710,5 +721,6 @@
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem15;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem17;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem18;
+        private DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider dxValidationProvider1;
     }
 }

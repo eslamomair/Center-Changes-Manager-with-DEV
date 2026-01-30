@@ -47,9 +47,9 @@ namespace CenterChangesManager.BLL
 
         }
 
-        private bool _DELETEChangeType()
+        public static bool DELETEChangeType(int ID)
         {
-            return DAL.clsChangeTypeData.DeleteChangeType(this.ChangeTypeID);
+            return DAL.clsChangeTypeData.DeleteChangeType(ID);
 
         }
 

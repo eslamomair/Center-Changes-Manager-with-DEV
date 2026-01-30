@@ -125,6 +125,13 @@ namespace CenterChanges
         private void accordionControlElement13_Click(object sender, EventArgs e)
         {
             NavigateToPage(navigationCompanyInfo, "اعداد بيانات الجهة ");
+            ctrCompanySettings1.LoadOrganization(1);
+        }
+
+        private void accordionControlElement9_Click(object sender, EventArgs e)
+        {
+            NavigateToPage(navigationChangeType, "بيانات المخالفات ");
+            ctrChangeTypes1.LoadControl();
         }
     }
 }
