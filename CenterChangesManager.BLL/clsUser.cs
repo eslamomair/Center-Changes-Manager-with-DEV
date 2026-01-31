@@ -82,5 +82,10 @@ namespace CenterChangesManager.BLL
 
             DataList.Select(user => new clsUser(user)).ToList();
         }
+
+        public static async Task<bool> IsAnyUserExistsAsync()
+        {
+            return await clsUserData.IsAnyUserExists();
+        }
     }
 }

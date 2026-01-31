@@ -1,4 +1,5 @@
 ﻿using CenterChangesManager.BLL;
+using CenterChangesManager.Main.Login;
 using DevExpress.XtraBars.FluentDesignSystem;
 using DevExpress.XtraBars.Navigation;
 using DevExpress.XtraEditors;
@@ -8,11 +9,11 @@ namespace CenterChanges
     public partial class frmMain : FluentDesignForm
     {
 
+        frmLogin login;
 
-
-        public frmMain()
+        public frmMain(frmLogin frmLogin)
         {
-
+            login = frmLogin;
             InitializeComponent();
             btnHome_Click(null, null);
         }

@@ -1,4 +1,5 @@
-﻿using DevExpress.XtraEditors;
+﻿using CenterChangesManager.Main.Login;
+using DevExpress.XtraEditors;
 namespace CenterChanges
 {
     internal static class Program
@@ -16,7 +17,7 @@ namespace CenterChanges
 
             WindowsFormsSettings.SetDPIAware();
             // الاستدعاء الصحيح للدالة بإرسال القيمة داخل الأقواس
-            Application.Run(new frmMain());
+            Application.Run(new frmLogin());
         }
     }
 }

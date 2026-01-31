@@ -1,6 +1,7 @@
 ﻿using CenterChangesManager.Common;
 using Dapper;
 using Microsoft.Data.SqlClient;
+using System.Data;
 
 
 namespace CenterChangesManager.DAL
@@ -73,5 +74,18 @@ namespace CenterChangesManager.DAL
             }
         }
 
+        public static async Task<bool> IsAnyUserExists()
+        {
+            using (IDbConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
+            {
+                string Query = @"SELECT CASE 
+       WHEN EXISTS (SELECT 1 FROM Users)
+       THEN CAST(1 AS BIT)
+       ELSE CAST(0 AS BIT)
+       END;     ";
+
+                return await connection.ExecuteScalarAsync<bool>(Query);
+            }
+        }
     }
 }
