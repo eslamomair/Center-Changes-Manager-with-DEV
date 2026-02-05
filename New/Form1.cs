@@ -142,5 +142,12 @@ namespace CenterChanges
             NavigateToPage(navigationPageAddUser, "اضافه مستخدم ");
 
         }
+
+        private void accordionControlElement10_Click(object sender, EventArgs e)
+        {
+            NavigateToPage(navigationPageEditeUser, "تعديل بيانات  مستخدم ");
+
+            ctrEditUsers1.StartControl();
+        }
     }
 }

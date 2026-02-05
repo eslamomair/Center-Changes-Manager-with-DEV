@@ -118,7 +118,7 @@ namespace CenterChangesManager.BLL
             clsUser user = new clsUser();
 
             user.UserData.FullName = data.FullName;
-            user.UserData.Permession = data.Permession;
+            user.UserData.Permissions = data.Permissions;
             user.UserData.Email = data.Email;
 
             user.UserData.UserName = data.UserName;

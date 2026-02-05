@@ -36,7 +36,7 @@
         public static bool CheckAccess(enPermissions RequiredPermission)
         {
             return CheckAccess(
-                ConvertFromInt(clsGlobal.CurrentUser.UserData.Permession),
+                ConvertFromInt(clsGlobal.CurrentUser.UserData.Permissions),
                 RequiredPermission
             );
         }

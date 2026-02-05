@@ -53,6 +53,7 @@
             ctrUserManagement1 = new CenterChangesManager.Main.Setting_Control.ctrUserManagement();
             navigationPageDeleteUser = new DevExpress.XtraBars.Navigation.NavigationPage();
             navigationPageEditeUser = new DevExpress.XtraBars.Navigation.NavigationPage();
+            ctrEditUsers1 = new CenterChangesManager.Main.Users.ctrEditUsers();
             navigationPageDeleteVariable = new DevExpress.XtraBars.Navigation.NavigationPage();
             navigationPagePermessionUser = new DevExpress.XtraBars.Navigation.NavigationPage();
             pnlHeader = new DevExpress.XtraEditors.PanelControl();
@@ -99,6 +100,7 @@
             navigationCompanyInfo.SuspendLayout();
             navigationChangeType.SuspendLayout();
             navigationPageAddUser.SuspendLayout();
+            navigationPageEditeUser.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pnlHeader).BeginInit();
             pnlHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)accordionControl1).BeginInit();
@@ -133,8 +135,8 @@
             navigationFrame1.Controls.Add(navigationCompanyInfo);
             navigationFrame1.Controls.Add(navigationChangeType);
             navigationFrame1.Controls.Add(navigationPageAddUser);
-            navigationFrame1.Controls.Add(navigationPageDeleteUser);
             navigationFrame1.Controls.Add(navigationPageEditeUser);
+            navigationFrame1.Controls.Add(navigationPageDeleteUser);
             navigationFrame1.Controls.Add(navigationPageDeleteVariable);
             navigationFrame1.Controls.Add(navigationPagePermessionUser);
             navigationFrame1.Dock = DockStyle.Fill;
@@ -307,8 +309,17 @@
             // 
             // navigationPageEditeUser
             // 
+            navigationPageEditeUser.Controls.Add(ctrEditUsers1);
             navigationPageEditeUser.Name = "navigationPageEditeUser";
             navigationPageEditeUser.Size = new Size(933, 548);
+            // 
+            // ctrEditUsers1
+            // 
+            ctrEditUsers1.Dock = DockStyle.Fill;
+            ctrEditUsers1.Location = new Point(0, 0);
+            ctrEditUsers1.Name = "ctrEditUsers1";
+            ctrEditUsers1.Size = new Size(933, 548);
+            ctrEditUsers1.TabIndex = 0;
             // 
             // navigationPageDeleteVariable
             // 
@@ -467,6 +478,7 @@
             accordionControlElement10.Name = "accordionControlElement10";
             accordionControlElement10.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
             accordionControlElement10.Text = "تعديل بيانات مستخدم";
+            accordionControlElement10.Click += accordionControlElement10_Click;
             // 
             // accordionControlElement11
             // 
@@ -591,6 +603,7 @@
             navigationCompanyInfo.ResumeLayout(false);
             navigationChangeType.ResumeLayout(false);
             navigationPageAddUser.ResumeLayout(false);
+            navigationPageEditeUser.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pnlHeader).EndInit();
             pnlHeader.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)accordionControl1).EndInit();
@@ -659,6 +672,7 @@
         private DevExpress.XtraBars.Navigation.NavigationPage navigationPageDeleteUser;
         private DevExpress.XtraBars.Navigation.NavigationPage navigationPagePermessionUser;
         private CenterChangesManager.Main.Setting_Control.ctrUserManagement ctrUserManagement1;
+        private CenterChangesManager.Main.Users.ctrEditUsers ctrEditUsers1;
     }
 }
 

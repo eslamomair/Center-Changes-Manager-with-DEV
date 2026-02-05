@@ -11,7 +11,7 @@ namespace CenterChangesManager.Main.Setting_Control
         int ID;
         public enum enMode { AddNew = 1, Update = 2 }
         public enMode Mode;
-        private clsUser _User;
+        private clsUser? _User;
 
         public ctrUserManagement()
         {
@@ -60,7 +60,7 @@ namespace CenterChangesManager.Main.Setting_Control
 
             txtUserName.Text = _User.UserData.UserName;
 
-            enPermissions userPerms = (enPermissions)_User.UserData.Permession;
+            enPermissions userPerms = (enPermissions)_User.UserData.Permissions;
 
 
             chkAllPermission.Checked = (userPerms == enPermissions.All);
@@ -127,7 +127,7 @@ namespace CenterChangesManager.Main.Setting_Control
                 FullName = txtFullNameUser.Text.Trim(),
                 Email = txtEmail.Text.Trim(),
                 IsActive = true,
-                Permession = (int)GetPermissions()
+                Permissions = (int)GetPermissions()
 
             };
 
@@ -154,7 +154,8 @@ namespace CenterChangesManager.Main.Setting_Control
             bool isNameTaken = await clsUser.IsUserNameUsedAsync(currentName);
 
             // 2. منطق الاستثناء (Business Logic for Update)
-            if (Mode == enMode.Update && _User.UserData.UserName == currentName)
+            // Guard against _User being null to avoid possible null reference.
+            if (Mode == enMode.Update && _User != null && _User.UserData != null && _User.UserData.UserName == currentName)
             {
                 // إذا كان وضع تعديل + الاسم لم يتغير = نعتبره غير مأخوذ (مسموح)
                 isNameTaken = false;

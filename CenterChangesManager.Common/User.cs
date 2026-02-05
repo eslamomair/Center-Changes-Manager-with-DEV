@@ -13,7 +13,7 @@ namespace CenterChangesManager.Common
         public string UserName { get; set; }
 
         public string FullName { get; set; }
-        public int Permession { get; set; }
+        public int Permissions { get; set; }
         public string Email { get; set; }
         public bool IsActive { get; set; }
 
@@ -40,7 +40,7 @@ namespace CenterChangesManager.Common
         public bool IsActive { get; set; }
         public string FullName { get; set; }
         public string Email { get; set; }
-        public int Permession { get; set; }
+        public int Permissions { get; set; }
     }
 
     public static class PasswordHasher
@@ -49,9 +49,9 @@ namespace CenterChangesManager.Common
         public static void CreatePasswordHash(string Password,
             out string hash, out string salt, out int memory, out int intreations, out int parallelism)
         {
-            memory = 65536; // 64m
-            intreations = 3;
-            parallelism = 4;
+            memory = 19456; // 19m
+            intreations = 2;
+            parallelism = 1;
 
             byte[] saltBytes = RandomNumberGenerator.GetBytes(16);
 
