@@ -7,36 +7,53 @@ namespace CenterChangesManager.BLL
         public enum enMode { AddNew = 1, Update = 2 }
         public enMode Mode { get; private set; } = enMode.AddNew;
 
-        public clsUsers UserData { get; set; }
+        public User UserData { get; set; }
 
         // منشئ للمستخدم الجديد
         public clsUser()
         {
-            this.UserData = new clsUsers { UserID = -1 };
+            this.UserData = new User { UserID = -1 };
             this.Mode = enMode.AddNew;
         }
 
         // منشئ خاص لتحميل بيانات موجودة
-        private clsUser(clsUsers user)
+        private clsUser(User user)
         {
             this.UserData = user;
             this.Mode = enMode.Update;
         }
 
         // البحث
-        public static async Task<clsUser> FindAsync(int userID)
+        public static async Task<clsUser?> FindAsync(int userID)
         {
-            var user = await clsUserData.GetUserByIDAsync(userID);
+            User? user = await clsUserData.GetUserByIDAsync(userID);
             return (user != null) ? new clsUser(user) : null;
         }
 
         // تسجيل الدخول
-        public static async Task<clsUser> LoginAsync(string username, string password)
+        public static async Task<clsUser?> LoginAsync(string userName, string password)
         {
-            var user = await clsUserData.GetUserByUsernameAndPasswordAsync(username, password);
-            if (user != null && user.IsActive)
-                return new clsUser(user);
-            return null;
+
+            if (string.IsNullOrWhiteSpace(userName) || string.IsNullOrWhiteSpace(password))
+                return null;
+
+            User? user = await clsUserData.GetUserByUsernameAsync(userName);
+
+            if (user == null)
+            {
+                return null;
+            }
+
+            bool IsVaildPassword = PasswordHasher.VerifyPassword
+                (password, user.PasswordHash, user.PasswordSalt,
+                user.ArgonMemorySize, user.ArgonIterations, user.ArgonParallelism);
+
+            if (!IsVaildPassword)
+            {
+                return null;
+            }
+
+            return new clsUser(user);
         }
 
         // التحقق من الاسم
@@ -46,7 +63,7 @@ namespace CenterChangesManager.BLL
         }
 
         // الحفظ الذكي
-        public async Task<bool> SaveAsync()
+        public async Task<bool> Save()
         {
             switch (Mode)
             {
@@ -54,7 +71,7 @@ namespace CenterChangesManager.BLL
                     if (await IsUserNameUsedAsync(this.UserData.UserName))
                         throw new Exception("اسم المستخدم مكرر في النظام.");
 
-                    this.UserData.UserID = await clsUserData.AddNewUserAsync(this.UserData);
+                    this.UserData.UserID = clsUserData.AddNewUser(this.UserData);
                     if (this.UserData.UserID != -1)
                     {
                         this.Mode = enMode.Update;
@@ -63,14 +80,14 @@ namespace CenterChangesManager.BLL
                     return false;
 
                 case enMode.Update:
-                    return await clsUserData.UpdateUserAsync(this.UserData);
+                    return clsUserData.UpdateUser(this.UserData);
             }
             return false;
         }
 
-        public static async Task<bool> DeleteAsync(int userID)
+        public static bool DeleteAsync(int userID)
         {
-            return await clsUserData.DeleteUserAsync(userID);
+            return clsUserData.DeleteUser(userID);
         }
 
         public static async Task<IEnumerable<clsUser>> GetAllUsersAsync()
@@ -87,5 +104,36 @@ namespace CenterChangesManager.BLL
         {
             return await clsUserData.IsAnyUserExists();
         }
+
+
+
+
+
+
+
+        public static clsUser CreateNew(UserRegisterData data)
+        {
+            PasswordHasher.CreatePasswordHash(data.Password, out string hash, out string salt, out int memory, out int iterations, out int parallelism);
+
+            clsUser user = new clsUser();
+
+            user.UserData.FullName = data.FullName;
+            user.UserData.Permession = data.Permession;
+            user.UserData.Email = data.Email;
+
+            user.UserData.UserName = data.UserName;
+            user.UserData.PasswordHash = hash;
+            user.UserData.PasswordSalt = salt;
+            user.UserData.ArgonMemorySize = memory;
+            user.UserData.ArgonIterations = iterations;
+            user.UserData.ArgonParallelism = parallelism;
+            user.UserData.IsActive = true;
+
+            // الباسورد انتهى
+            data.Password = null;
+
+            return user;
+        }
+
     }
 }

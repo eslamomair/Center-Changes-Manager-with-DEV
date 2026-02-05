@@ -6,61 +6,39 @@
         public enum enPermissions
         {
             None = 0,
-            AddVariable = 1,          // 1
-            EditVariable = 2,         // 2
-            DeleteVariable = 4,       // 4
-            ViewReports = 8,          // 8
-            ExportData = 16,          // 16
-            DeleteAttachments = 32,   // 32
-            ManageUsers = 64,         // 64
-            EditPermissions = 128,    // 128
-            DeleteUser = 256,         // 256
-            All = -1                  // المدير العام
+            AddVariable = 1 << 0,          // 1
+            EditVariable = 1 << 1,         // 2
+            DeleteVariable = 1 << 2,       // 4
+            ViewReports = 1 << 3,         // 8
+            ExportData = 1 << 4,          // 16
+            DeleteAttachments = 1 << 5,   // 32
+            ManageUsers = 1 << 6,         // 64
+            EditPermissions = 1 << 7,    // 128
+            DeleteUser = 1 << 8,         // 256
+            All = AddVariable | EditVariable | DeleteVariable | ViewReports
+        | ExportData | DeleteAttachments | ManageUsers | EditPermissions | DeleteUser// المدير العام
         }
 
-        //public static bool ApplyMainMenuPermissions()
-        //{
-        //    if (!CheckAccess(ConvertFromInt(clsGlobal.CurrentUser.UserData.Permession), enPermissions.ExportData))
-        //    {
-        //        return false;
-        //    }
-        //    if (!CheckAccess(ConvertFromInt(clsGlobal.CurrentUser.UserData.Permession), enPermissions.AddNewChange))
-        //    {
-        //        return false;
-        //    }
-        //    if (!CheckAccess(ConvertFromInt(clsGlobal.CurrentUser.UserData.Permession), enPermissions.UpdateChange))
-        //    {
-        //        return false;
-        //    }
-        //    return true;
-        //}
+
 
         public static bool CheckAccess(enPermissions userPermission, enPermissions requiredPermission)
         {
-            if (userPermission == enPermissions.All)
-            {
-                return true;
-            }
-
-            if ((requiredPermission & userPermission) == requiredPermission)
-                return true;
-            return false;
+            return (userPermission & requiredPermission) == requiredPermission;
         }
 
+        // تحويل الرقم القادم من DB مع فلترة آمنة
         public static enPermissions ConvertFromInt(int permissionsValue)
         {
-            return (enPermissions)permissionsValue;
+            return (enPermissions)permissionsValue & enPermissions.All;
         }
 
-
-        public static bool ChekAccess(enPermissions RequiredPermission)
+        // التحقق باستخدام المستخدم الحالي
+        public static bool CheckAccess(enPermissions RequiredPermission)
         {
-            if (CheckAccess(ConvertFromInt(clsGlobal.CurrentUser.UserData.Permession), RequiredPermission))
-            {
-
-                return true;
-            }
-            return false;
+            return CheckAccess(
+                ConvertFromInt(clsGlobal.CurrentUser.UserData.Permession),
+                RequiredPermission
+            );
         }
 
     }

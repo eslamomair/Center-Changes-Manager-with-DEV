@@ -136,5 +136,11 @@ namespace CenterChanges
             NavigateToPage(navigationChangeType, "بيانات المخالفات ");
             ctrChangeTypes1.LoadControl();
         }
+
+        private void accordionControlElement5_Click(object sender, EventArgs e)
+        {
+            NavigateToPage(navigationPageAddUser, "اضافه مستخدم ");
+
+        }
     }
 }

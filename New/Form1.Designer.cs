@@ -48,8 +48,13 @@
             navigationCompanyInfo = new DevExpress.XtraBars.Navigation.NavigationPage();
             ctrCompanySettings1 = new CenterChangesManager.Main.Setting_Control.ctrCompanySettings();
             navigationChangeType = new DevExpress.XtraBars.Navigation.NavigationPage();
+            ctrChangeTypes1 = new CenterChangesManager.Main.Setting_Control.ctrChangeTypes();
+            navigationPageAddUser = new DevExpress.XtraBars.Navigation.NavigationPage();
+            ctrUserManagement1 = new CenterChangesManager.Main.Setting_Control.ctrUserManagement();
+            navigationPageDeleteUser = new DevExpress.XtraBars.Navigation.NavigationPage();
+            navigationPageEditeUser = new DevExpress.XtraBars.Navigation.NavigationPage();
             navigationPageDeleteVariable = new DevExpress.XtraBars.Navigation.NavigationPage();
-            navigationPage1 = new DevExpress.XtraBars.Navigation.NavigationPage();
+            navigationPagePermessionUser = new DevExpress.XtraBars.Navigation.NavigationPage();
             pnlHeader = new DevExpress.XtraEditors.PanelControl();
             lblHeaderTitle = new DevExpress.XtraEditors.LabelControl();
             accordionControl1 = new DevExpress.XtraBars.Navigation.AccordionControl();
@@ -65,9 +70,13 @@
             btnCitesAndVilage = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             btnEmployee = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             accordionControlElement9 = new DevExpress.XtraBars.Navigation.AccordionControlElement();
+            accordionControlElement4 = new DevExpress.XtraBars.Navigation.AccordionControlElement();
+            accordionControlElement5 = new DevExpress.XtraBars.Navigation.AccordionControlElement();
+            accordionControlElement10 = new DevExpress.XtraBars.Navigation.AccordionControlElement();
+            accordionControlElement11 = new DevExpress.XtraBars.Navigation.AccordionControlElement();
+            accordionControlElement16 = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             accordionControlElement3 = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             accordionControlElement13 = new DevExpress.XtraBars.Navigation.AccordionControlElement();
-            accordionControlElement14 = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             accordionControlElement15 = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             accordionControlElement12 = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             fluentDesignFormControl1 = new DevExpress.XtraBars.FluentDesignSystem.FluentDesignFormControl();
@@ -76,7 +85,7 @@
             accordionControlElement2 = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             accordionControlElement6 = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             accordionControlElement7 = new DevExpress.XtraBars.Navigation.AccordionControlElement();
-            ctrChangeTypes1 = new CenterChangesManager.Main.Setting_Control.ctrChangeTypes();
+            accordionControlElement14 = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             fluentContainerMaster.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)navigationFrame1).BeginInit();
             navigationFrame1.SuspendLayout();
@@ -89,6 +98,7 @@
             navigationPageCitcyAndVilage.SuspendLayout();
             navigationCompanyInfo.SuspendLayout();
             navigationChangeType.SuspendLayout();
+            navigationPageAddUser.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pnlHeader).BeginInit();
             pnlHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)accordionControl1).BeginInit();
@@ -122,12 +132,15 @@
             navigationFrame1.Controls.Add(navigationPageCitcyAndVilage);
             navigationFrame1.Controls.Add(navigationCompanyInfo);
             navigationFrame1.Controls.Add(navigationChangeType);
+            navigationFrame1.Controls.Add(navigationPageAddUser);
+            navigationFrame1.Controls.Add(navigationPageDeleteUser);
+            navigationFrame1.Controls.Add(navigationPageEditeUser);
             navigationFrame1.Controls.Add(navigationPageDeleteVariable);
-            navigationFrame1.Controls.Add(navigationPage1);
+            navigationFrame1.Controls.Add(navigationPagePermessionUser);
             navigationFrame1.Dock = DockStyle.Fill;
             navigationFrame1.Location = new Point(0, 70);
             navigationFrame1.Name = "navigationFrame1";
-            navigationFrame1.Pages.AddRange(new DevExpress.XtraBars.Navigation.NavigationPageBase[] { navigationPageHome, navigationPageVariablesLog, navigationPageAddVariable, navigationPageEditVariable, navigationPageDeleteVariable, navigationPageAttachments, navigationPageCitcyAndVilage, navigationPageEmployee, navigationChangeType, navigationCompanyInfo, navigationPage1 });
+            navigationFrame1.Pages.AddRange(new DevExpress.XtraBars.Navigation.NavigationPageBase[] { navigationPageHome, navigationPageVariablesLog, navigationPageAddVariable, navigationPageEditVariable, navigationPageDeleteVariable, navigationPageAttachments, navigationPageCitcyAndVilage, navigationPageEmployee, navigationChangeType, navigationCompanyInfo, navigationPageAddUser, navigationPageEditeUser, navigationPageDeleteUser, navigationPagePermessionUser });
             navigationFrame1.SelectedPage = navigationPageHome;
             navigationFrame1.Size = new Size(933, 548);
             navigationFrame1.TabIndex = 1;
@@ -263,15 +276,49 @@
             navigationChangeType.Name = "navigationChangeType";
             navigationChangeType.Size = new Size(933, 548);
             // 
+            // ctrChangeTypes1
+            // 
+            ctrChangeTypes1.Dock = DockStyle.Fill;
+            ctrChangeTypes1.Location = new Point(0, 0);
+            ctrChangeTypes1.Name = "ctrChangeTypes1";
+            ctrChangeTypes1.RightToLeft = RightToLeft.Yes;
+            ctrChangeTypes1.Size = new Size(933, 548);
+            ctrChangeTypes1.TabIndex = 0;
+            // 
+            // navigationPageAddUser
+            // 
+            navigationPageAddUser.Controls.Add(ctrUserManagement1);
+            navigationPageAddUser.Name = "navigationPageAddUser";
+            navigationPageAddUser.Size = new Size(933, 548);
+            // 
+            // ctrUserManagement1
+            // 
+            ctrUserManagement1.Dock = DockStyle.Right;
+            ctrUserManagement1.Location = new Point(0, 0);
+            ctrUserManagement1.Name = "ctrUserManagement1";
+            ctrUserManagement1.RightToLeft = RightToLeft.Yes;
+            ctrUserManagement1.Size = new Size(933, 548);
+            ctrUserManagement1.TabIndex = 0;
+            // 
+            // navigationPageDeleteUser
+            // 
+            navigationPageDeleteUser.Name = "navigationPageDeleteUser";
+            navigationPageDeleteUser.Size = new Size(933, 548);
+            // 
+            // navigationPageEditeUser
+            // 
+            navigationPageEditeUser.Name = "navigationPageEditeUser";
+            navigationPageEditeUser.Size = new Size(933, 548);
+            // 
             // navigationPageDeleteVariable
             // 
             navigationPageDeleteVariable.Name = "navigationPageDeleteVariable";
             navigationPageDeleteVariable.Size = new Size(933, 548);
             // 
-            // navigationPage1
+            // navigationPagePermessionUser
             // 
-            navigationPage1.Name = "navigationPage1";
-            navigationPage1.Size = new Size(933, 548);
+            navigationPagePermessionUser.Name = "navigationPagePermessionUser";
+            navigationPagePermessionUser.Size = new Size(933, 548);
             // 
             // pnlHeader
             // 
@@ -311,7 +358,7 @@
             accordionControl1.Appearance.Item.Normal.Font = new Font("Segoe UI", 12F);
             accordionControl1.Appearance.Item.Normal.Options.UseFont = true;
             accordionControl1.Dock = DockStyle.Left;
-            accordionControl1.Elements.AddRange(new DevExpress.XtraBars.Navigation.AccordionControlElement[] { accordionControlSeparator1, accordionControlElement8, accordionControlElement1, accordionControlElement3, accordionControlElement12 });
+            accordionControl1.Elements.AddRange(new DevExpress.XtraBars.Navigation.AccordionControlElement[] { accordionControlSeparator1, accordionControlElement8, accordionControlElement1, accordionControlElement4, accordionControlElement3, accordionControlElement12 });
             accordionControl1.Location = new Point(0, 33);
             accordionControl1.Margin = new Padding(4);
             accordionControl1.Name = "accordionControl1";
@@ -401,11 +448,43 @@
             accordionControlElement9.Text = "انواع المتغيرات";
             accordionControlElement9.Click += accordionControlElement9_Click;
             // 
+            // accordionControlElement4
+            // 
+            accordionControlElement4.Elements.AddRange(new DevExpress.XtraBars.Navigation.AccordionControlElement[] { accordionControlElement5, accordionControlElement10, accordionControlElement11, accordionControlElement16 });
+            accordionControlElement4.Expanded = true;
+            accordionControlElement4.Name = "accordionControlElement4";
+            accordionControlElement4.Text = "اداره المستخدمين";
+            // 
+            // accordionControlElement5
+            // 
+            accordionControlElement5.Name = "accordionControlElement5";
+            accordionControlElement5.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
+            accordionControlElement5.Text = "اضافه مستخدم";
+            accordionControlElement5.Click += accordionControlElement5_Click;
+            // 
+            // accordionControlElement10
+            // 
+            accordionControlElement10.Name = "accordionControlElement10";
+            accordionControlElement10.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
+            accordionControlElement10.Text = "تعديل بيانات مستخدم";
+            // 
+            // accordionControlElement11
+            // 
+            accordionControlElement11.Name = "accordionControlElement11";
+            accordionControlElement11.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
+            accordionControlElement11.Text = "حذف مستخدم";
+            // 
+            // accordionControlElement16
+            // 
+            accordionControlElement16.Name = "accordionControlElement16";
+            accordionControlElement16.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
+            accordionControlElement16.Text = "صلاحيات المستخدمين";
+            // 
             // accordionControlElement3
             // 
             accordionControlElement3.Appearance.Normal.Font = new Font("Segoe UI", 12F);
             accordionControlElement3.Appearance.Normal.Options.UseFont = true;
-            accordionControlElement3.Elements.AddRange(new DevExpress.XtraBars.Navigation.AccordionControlElement[] { accordionControlElement13, accordionControlElement14, accordionControlElement15 });
+            accordionControlElement3.Elements.AddRange(new DevExpress.XtraBars.Navigation.AccordionControlElement[] { accordionControlElement13, accordionControlElement15 });
             accordionControlElement3.Expanded = true;
             accordionControlElement3.Name = "accordionControlElement3";
             accordionControlElement3.Text = "الإعدادات";
@@ -416,12 +495,6 @@
             accordionControlElement13.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
             accordionControlElement13.Text = "بيانات الجهة";
             accordionControlElement13.Click += accordionControlElement13_Click;
-            // 
-            // accordionControlElement14
-            // 
-            accordionControlElement14.Name = "accordionControlElement14";
-            accordionControlElement14.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
-            accordionControlElement14.Text = "اداره المستخدمين";
             // 
             // accordionControlElement15
             // 
@@ -480,14 +553,11 @@
             accordionControlElement7.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
             accordionControlElement7.Text = "Element7";
             // 
-            // ctrChangeTypes1
+            // accordionControlElement14
             // 
-            ctrChangeTypes1.Dock = DockStyle.Fill;
-            ctrChangeTypes1.Location = new Point(0, 0);
-            ctrChangeTypes1.Name = "ctrChangeTypes1";
-            ctrChangeTypes1.RightToLeft = RightToLeft.Yes;
-            ctrChangeTypes1.Size = new Size(933, 548);
-            ctrChangeTypes1.TabIndex = 0;
+            accordionControlElement14.Name = "accordionControlElement14";
+            accordionControlElement14.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
+            accordionControlElement14.Text = "اداره المستخدمين";
             // 
             // frmMain
             // 
@@ -520,6 +590,7 @@
             navigationPageCitcyAndVilage.ResumeLayout(false);
             navigationCompanyInfo.ResumeLayout(false);
             navigationChangeType.ResumeLayout(false);
+            navigationPageAddUser.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pnlHeader).EndInit();
             pnlHeader.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)accordionControl1).EndInit();
@@ -572,13 +643,22 @@
         private ControlsCites.ctrCity ctrCity1;
         private CenterChangesManager.Main.DSHBO.ctrDashboardChanges ctrDashboardChanges1;
         private DevExpress.XtraBars.Navigation.AccordionControlElement accordionControlElement9;
-        private DevExpress.XtraBars.Navigation.NavigationPage navigationPage1;
+        private DevExpress.XtraBars.Navigation.NavigationPage navigationPageAddUser;
         private CenterChangesManager.Main.Setting_Control.ctrCompanySettings ctrCompanySettings1;
         private DevExpress.XtraBars.Navigation.AccordionControlElement accordionControlElement13;
-        private DevExpress.XtraBars.Navigation.AccordionControlElement accordionControlElement14;
         private DevExpress.XtraBars.Navigation.AccordionControlElement accordionControlElement15;
         private DevExpress.XtraBars.Navigation.AccordionControlElement accordionControlElement12;
         private CenterChangesManager.Main.Setting_Control.ctrChangeTypes ctrChangeTypes1;
+        private DevExpress.XtraBars.Navigation.AccordionControlElement accordionControlElement4;
+        private DevExpress.XtraBars.Navigation.AccordionControlElement accordionControlElement5;
+        private DevExpress.XtraBars.Navigation.AccordionControlElement accordionControlElement10;
+        private DevExpress.XtraBars.Navigation.AccordionControlElement accordionControlElement11;
+        private DevExpress.XtraBars.Navigation.AccordionControlElement accordionControlElement16;
+        private DevExpress.XtraBars.Navigation.AccordionControlElement accordionControlElement14;
+        private DevExpress.XtraBars.Navigation.NavigationPage navigationPageEditeUser;
+        private DevExpress.XtraBars.Navigation.NavigationPage navigationPageDeleteUser;
+        private DevExpress.XtraBars.Navigation.NavigationPage navigationPagePermessionUser;
+        private CenterChangesManager.Main.Setting_Control.ctrUserManagement ctrUserManagement1;
     }
 }
 

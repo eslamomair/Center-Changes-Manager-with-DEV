@@ -199,7 +199,7 @@ namespace CenterChangesManager.DAL
                         ca.UploadDate,
                         u.UserName AS UploadedBy
                     FROM ChangeAttachments ca
-                    INNER JOIN Users u ON ca.UploadedBy = u.UserID
+                    INNER JOIN User u ON ca.UploadedBy = u.UserID
                     WHERE ca.Log_ID = @LogID
                     ORDER BY ca.UploadDate DESC";
 
@@ -389,7 +389,7 @@ namespace CenterChangesManager.DAL
                         u.UserName AS UploadedBy
                     FROM ChangeAttachments ca
                     INNER JOIN ChangesLog cl ON ca.Log_ID = cl.LogID
-                    INNER JOIN Users u ON ca.UploadedBy = u.UserID
+                    INNER JOIN User u ON ca.UploadedBy = u.UserID
                     ORDER BY ca.UploadDate DESC";
 
                 using (SqlCommand command = new SqlCommand(query, connection))

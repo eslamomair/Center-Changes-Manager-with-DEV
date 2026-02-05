@@ -1,5 +1,6 @@
 ﻿using CenterChangesManager.Common;
 using Dapper;
+using Dapper.Contrib.Extensions;
 using Microsoft.Data.SqlClient;
 using System.Data;
 
@@ -8,72 +9,79 @@ namespace CenterChangesManager.DAL
 {
     public class clsUserData
     {
-        public static async Task<clsUsers> GetUserByIDAsync(int userId)
+        public static async Task<User?> GetUserByIDAsync(int userId)
         {
-            using (var connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
+            using (IDbConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
             {
-                return await connection.QueryFirstOrDefaultAsync<clsUsers>(
+                return await connection.QueryFirstOrDefaultAsync<User>(
                     "SELECT * FROM Users WHERE UserID = @UserID", new { UserID = userId });
             }
         }
 
-        public static async Task<clsUsers> GetUserByUsernameAndPasswordAsync(string username, string password)
+        public static async Task<User?> GetUserByUsernameAsync(string username)
         {
-            using (var connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
+            using (IDbConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
             {
-                return await connection.QueryFirstOrDefaultAsync<clsUsers>(
-                    "SELECT * FROM Users WHERE UserName = @UserName AND Password = @Password",
-                    new { UserName = username, Password = password });
+                return await connection.QueryFirstOrDefaultAsync<User>(
+                   "SELECT * FROM Users WHERE UserName = @UserName",
+                    new { UserName = username });
             }
         }
 
-        public static async Task<int> AddNewUserAsync(clsUsers user)
+        public static int AddNewUser(User user)
         {
-            using (var connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
+            using (IDbConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
             {
-                string query = @"INSERT INTO Users (UserName, Password, FullName, Permession, IsActive)
-                             VALUES (@UserName, @Password, @FullName, @Permession, @IsActive);
-                             SELECT CAST(SCOPE_IDENTITY() as int);";
-                return await connection.QuerySingleAsync<int>(query, user);
+                //string query = @"INSERT INTO User (UserName, Password, FullName, Permession, IsActive)
+                //             VALUES (@UserName, @Password, @FullName, @Permession, @IsActive);
+                //             SELECT CAST(SCOPE_IDENTITY() as int);";
+                //return await connection.QuerySingleAsync<int>(query, user);
+
+                int id = Convert.ToInt32(connection.Insert(user));
+                return id;
             }
         }
 
-        public static async Task<bool> UpdateUserAsync(clsUsers user)
+        public static bool UpdateUser(User user)
         {
-            using (var connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
+            using (IDbConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
             {
-                string query = @"UPDATE Users SET UserName=@UserName, Password=@Password, 
-                             FullName=@FullName, Permession=@Permession, IsActive=@IsActive 
-                             WHERE UserID=@UserID";
-                return await connection.ExecuteAsync(query, user) > 0;
+                //string query = @"UPDATE User SET UserName=@UserName, Password=@Password, 
+                //             FullName=@FullName, Permession=@Permession, IsActive=@IsActive 
+                //             WHERE UserID=@UserID";
+                //return await connection.ExecuteAsync(query, user) > 0;
+
+                return connection.Update(user);
             }
         }
 
-        public static async Task<bool> DeleteUserAsync(int userId)
+        public static bool DeleteUser(int userId)
         {
-            using (var connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
+            using (IDbConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
             {
-                return await connection.ExecuteAsync("DELETE FROM Users WHERE UserID=@UserID", new { UserID = userId }) > 0;
+                //  return await connection.ExecuteAsync("DELETE FROM User WHERE UserID=@UserID", new { UserID = userId }) > 0;
+                return connection.Delete(new User { UserID = userId });
             }
         }
 
         public static async Task<bool> IsUserExistAsync(string username)
         {
-            using (var connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
+            using (IDbConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
             {
                 return await connection.ExecuteScalarAsync<bool>(
-                    "SELECT COUNT(1) FROM Users WHERE UserName = @UserName", new { UserName = username });
+                    @"SELECT CASE  WHEN EXISTS (SELECT 1 FROM Users WHERE UserName = @UserName)   THEN CAST(1 AS BIT)  ELSE CAST(0 AS BIT) END", new { UserName = username });
             }
         }
 
-        public static async Task<IEnumerable<clsUsers>> GetAllUsersAsync()
+        public static async Task<IEnumerable<User>> GetAllUsersAsync()
         {
-            using (var connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
+            using (IDbConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
             {
-                return await connection.QueryAsync<clsUsers>("SELECT * FROM Users");
+                return await connection.QueryAsync<User>("SELECT * FROM Users");
             }
         }
 
+        //انت كنت نسيت بيعمل ايه وكنت هتحذفه .. بيسال هل هناك ادمن ام لا 
         public static async Task<bool> IsAnyUserExists()
         {
             using (IDbConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
