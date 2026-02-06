@@ -5,7 +5,7 @@ using static CenterChangesManager.BLL.Global.clsPermissions;
 
 namespace CenterChangesManager.Main.Setting_Control
 {
-    public partial class ctrUserManagement : DevExpress.XtraEditors.XtraUserControl
+    public partial class ctrAddEditUser : DevExpress.XtraEditors.XtraUserControl
     {
         private bool _isUserNameValid = false;
         int ID;
@@ -13,7 +13,7 @@ namespace CenterChangesManager.Main.Setting_Control
         public enMode Mode;
         private clsUser? _User;
 
-        public ctrUserManagement()
+        public ctrAddEditUser()
         {
             InitializeComponent();
         }
@@ -60,10 +60,12 @@ namespace CenterChangesManager.Main.Setting_Control
 
             txtUserName.Text = _User.UserData.UserName;
 
-            enPermissions userPerms = (enPermissions)_User.UserData.Permissions;
+            enPermissions userPerms = (enPermissions)_User.UserData.Permession;
 
 
-            chkAllPermission.Checked = (userPerms == enPermissions.All);
+            chkAllPermission.Checked = ((userPerms & enPermissions.All) == enPermissions.All);
+
+
             chkPermissionAddChange.Checked = ((userPerms & enPermissions.AddVariable) == enPermissions.AddVariable);
             chkPermissionEditChange.Checked = ((userPerms & enPermissions.EditVariable) == enPermissions.EditVariable);
             chkPermissionDeleteChange.Checked = ((userPerms & enPermissions.DeleteVariable) == enPermissions.DeleteVariable);
@@ -120,18 +122,54 @@ namespace CenterChangesManager.Main.Setting_Control
                 return;
             }
 
-            UserRegisterData registerData = new UserRegisterData
+            if (Mode == enMode.AddNew)
             {
-                UserName = txtUserName.Text.Trim(),
-                Password = txtPassword.Text.Trim(),
-                FullName = txtFullNameUser.Text.Trim(),
-                Email = txtEmail.Text.Trim(),
-                IsActive = true,
-                Permissions = (int)GetPermissions()
 
-            };
+                if (string.IsNullOrWhiteSpace(txtPassword.Text))
+                {
+                    txtPassword.ErrorText = "يجب إدخال كلمة مرور للمستخدم الجديد";
+                    return;
+                }
 
-            _User = clsUser.CreateNew(registerData);
+                UserRegisterData registerData = new UserRegisterData
+                {
+                    UserName = txtUserName.Text.Trim(),
+                    Password = txtPassword.Text.Trim(),
+                    FullName = txtFullNameUser.Text.Trim(),
+                    Email = txtEmail.Text.Trim(),
+                    IsActive = true,
+                    Permession = (int)GetPermissions()
+
+                };
+
+                _User = clsUser.CreateNew(registerData);
+
+            }
+            else
+            {
+                txtUserName.Enabled = false;
+                _User.UserData.FullName = txtFullNameUser.Text.Trim();
+                _User.UserData.Email = txtEmail.Text.Trim();
+                //  _User.UserData.UserName = txtUserName.Text.Trim(); 
+                _User.UserData.Permession = (int)GetPermissions();
+
+                //فحص هل ادخل المستخدم باسورد جديد 
+                if (!string.IsNullOrWhiteSpace(txtPassword.Text.Trim()))
+                {
+                    PasswordHasher.CreatePasswordHash(txtPassword.Text.Trim(),
+                        out string hash, out string salat, out int memory, out int itreations, out int paralllwlism);
+
+                    _User.UserData.PasswordHash = hash;
+                    _User.UserData.PasswordSalt = salat;
+                    _User.UserData.ArgonMemorySize = memory;
+                    _User.UserData.ArgonIterations = itreations;
+                    _User.UserData.ArgonParallelism = paralllwlism;
+
+
+                }
+            }
+
+
 
 
             if (await _User.Save())
@@ -180,6 +218,22 @@ namespace CenterChangesManager.Main.Setting_Control
                 txtUserName.Properties.Appearance.Options.UseBorderColor = false;
 
                 _isUserNameValid = true;
+            }
+        }
+
+        private void txtConfirmPassword_EditValueChanged(object sender, EventArgs e)
+        {
+            string password = txtPassword.Text;
+            string confirm = txtConfirmPassword.Text;
+
+            if (password != confirm)
+            {
+                txtConfirmPassword.ErrorText = "كلمة المرور غير متطابقة";
+            }
+            else
+            {
+
+                txtConfirmPassword.ErrorText = "";
             }
         }
     }

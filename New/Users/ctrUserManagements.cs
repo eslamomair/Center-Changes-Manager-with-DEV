@@ -4,9 +4,9 @@ using CenterChangesManager.Main.Utilities;
 
 namespace CenterChangesManager.Main.Users
 {
-    public partial class ctrEditUsers : DevExpress.XtraEditors.XtraUserControl
+    public partial class ctrUserManagements : DevExpress.XtraEditors.XtraUserControl
     {
-        public ctrEditUsers()
+        public ctrUserManagements()
         {
             InitializeComponent();
         }
@@ -25,7 +25,7 @@ namespace CenterChangesManager.Main.Users
                 int userId = Convert.ToInt32(view.GetRowCellValue(rowHandel, "UserData.UserID"));
 
                 // 2. تجهيز شاشة التعديل
-                ctrUserManagement userManagement = new ctrUserManagement();
+                ctrAddEditUser userManagement = new ctrAddEditUser();
                 userManagement.StartUserControl(userId); // تحميل البيانات داخلها
                 userManagement.Dock = DockStyle.Fill;    // ملء الفراغ
 
@@ -50,9 +50,10 @@ namespace CenterChangesManager.Main.Users
 
                 if (clsHelperClass.Confirm("هل انت متاكد من حذف هذا المستخدم "))
                 {
-                    clsUser.DeleteAsync(rowHandel);
+                    int userId = Convert.ToInt32(view.GetRowCellValue(rowHandel, "UserData.UserID"));
+                    clsUser.DeleteAsync(userId);
                     clsHelperClass.Success("تم حذف المستخدم بنجاح");
-                    view.DeleteRow(rowHandel);
+                    FillDataGrid();
                 }
 
 

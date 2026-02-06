@@ -60,7 +60,9 @@ namespace CenterChangesManager.DAL
             using (IDbConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
             {
                 //  return await connection.ExecuteAsync("DELETE FROM User WHERE UserID=@UserID", new { UserID = userId }) > 0;
-                return connection.Delete(new User { UserID = userId });
+                string query = "UPDATE Users SET IsActive = 0 WHERE UserID = @UserID";
+
+                return connection.Execute(query, new { UserID = userId }) > 0;
             }
         }
 

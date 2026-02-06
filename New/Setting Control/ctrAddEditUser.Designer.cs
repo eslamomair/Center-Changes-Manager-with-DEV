@@ -1,6 +1,6 @@
 ﻿namespace CenterChangesManager.Main.Setting_Control
 {
-    partial class ctrUserManagement
+    partial class ctrAddEditUser
     {
         /// <summary> 
         /// Required designer variable.
@@ -262,6 +262,7 @@
             txtConfirmPassword.Size = new Size(321, 44);
             txtConfirmPassword.StyleController = layoutControl1;
             txtConfirmPassword.TabIndex = 4;
+            txtConfirmPassword.EditValueChanged += txtConfirmPassword_EditValueChanged;
             // 
             // txtPassword
             // 
@@ -490,12 +491,12 @@
             emptySpaceItem2.Name = "emptySpaceItem2";
             emptySpaceItem2.Size = new Size(341, 43);
             // 
-            // ctrUserManagement
+            // ctrAddEditUser
             // 
             AutoScaleDimensions = new SizeF(6F, 13F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(layoutControl1);
-            Name = "ctrUserManagement";
+            Name = "ctrAddEditUser";
             RightToLeft = RightToLeft.Yes;
             Size = new Size(518, 679);
             ((System.ComponentModel.ISupportInitialize)layoutControl1).EndInit();

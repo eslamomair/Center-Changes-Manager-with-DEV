@@ -1,6 +1,6 @@
 ﻿namespace CenterChangesManager.Main.Users
 {
-    partial class ctrEditUsers
+    partial class ctrUserManagements
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,17 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ctrEditUsers));
-            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions1 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions2 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject5 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject6 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ctrUserManagements));
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions3 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject9 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject10 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject11 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject12 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions4 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject13 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject14 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject15 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject16 = new DevExpress.Utils.SerializableAppearanceObject();
             layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             gridControl1 = new DevExpress.XtraGrid.GridControl();
             gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -48,9 +48,9 @@
             gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             colActions = new DevExpress.XtraGrid.Columns.GridColumn();
             repositoryItemButtonEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
+            gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             Root = new DevExpress.XtraLayout.LayoutControlGroup();
             layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)layoutControl1).BeginInit();
             layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)gridControl1).BeginInit();
@@ -100,36 +100,41 @@
             // 
             gridColumn1.Caption = "اسم المستخدم";
             gridColumn1.FieldName = "UserData.UserName";
+            gridColumn1.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("gridColumn1.ImageOptions.SvgImage");
             gridColumn1.Name = "gridColumn1";
             gridColumn1.Visible = true;
             gridColumn1.VisibleIndex = 0;
-            gridColumn1.Width = 332;
+            gridColumn1.Width = 255;
             // 
             // gridColumn2
             // 
             gridColumn2.Caption = "الاسم بالكامل";
             gridColumn2.FieldName = "UserData.FullName";
+            gridColumn2.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("gridColumn2.ImageOptions.SvgImage");
             gridColumn2.Name = "gridColumn2";
             gridColumn2.Visible = true;
             gridColumn2.VisibleIndex = 1;
-            gridColumn2.Width = 332;
+            gridColumn2.Width = 317;
             // 
             // gridColumn3
             // 
             gridColumn3.Caption = "البريد الالكتروني";
             gridColumn3.FieldName = "UserData.Email";
+            gridColumn3.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("gridColumn3.ImageOptions.SvgImage");
             gridColumn3.Name = "gridColumn3";
             gridColumn3.Visible = true;
             gridColumn3.VisibleIndex = 2;
-            gridColumn3.Width = 334;
+            gridColumn3.Width = 302;
             // 
             // gridColumn4
             // 
             gridColumn4.Caption = "مفعل";
             gridColumn4.FieldName = "UserData.IsActive";
+            gridColumn4.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("gridColumn4.ImageOptions.SvgImage");
             gridColumn4.Name = "gridColumn4";
             gridColumn4.Visible = true;
             gridColumn4.VisibleIndex = 3;
+            gridColumn4.Width = 124;
             // 
             // colActions
             // 
@@ -145,12 +150,18 @@
             // repositoryItemButtonEdit1
             // 
             repositoryItemButtonEdit1.AutoHeight = false;
-            editorButtonImageOptions1.Image = Properties.Resources.editname_32x32;
-            editorButtonImageOptions2.Image = Properties.Resources.clear_32x32;
-            repositoryItemButtonEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", "Edit", null, DevExpress.Utils.ToolTipAnchor.Default), new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions2, new DevExpress.Utils.KeyShortcut(Keys.None), serializableAppearanceObject5, serializableAppearanceObject6, serializableAppearanceObject7, serializableAppearanceObject8, "", "Delete", null, DevExpress.Utils.ToolTipAnchor.Default) });
+            editorButtonImageOptions3.Image = Properties.Resources.editname_32x32;
+            editorButtonImageOptions4.Image = Properties.Resources.clear_32x32;
+            repositoryItemButtonEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions3, new DevExpress.Utils.KeyShortcut(Keys.None), serializableAppearanceObject9, serializableAppearanceObject10, serializableAppearanceObject11, serializableAppearanceObject12, "", "Edit", null, DevExpress.Utils.ToolTipAnchor.Default), new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions4, new DevExpress.Utils.KeyShortcut(Keys.None), serializableAppearanceObject13, serializableAppearanceObject14, serializableAppearanceObject15, serializableAppearanceObject16, "", "Delete", null, DevExpress.Utils.ToolTipAnchor.Default) });
             repositoryItemButtonEdit1.Name = "repositoryItemButtonEdit1";
             repositoryItemButtonEdit1.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
             repositoryItemButtonEdit1.ButtonClick += repositoryItemButtonEdit1_ButtonClick;
+            // 
+            // gridColumn5
+            // 
+            gridColumn5.Caption = "gridColumn5";
+            gridColumn5.FieldName = "UserData.UserID";
+            gridColumn5.Name = "gridColumn5";
             // 
             // Root
             // 
@@ -169,18 +180,12 @@
             layoutControlItem1.Size = new Size(1140, 605);
             layoutControlItem1.TextVisible = false;
             // 
-            // gridColumn5
-            // 
-            gridColumn5.Caption = "gridColumn5";
-            gridColumn5.FieldName = "UserData.UserID";
-            gridColumn5.Name = "gridColumn5";
-            // 
-            // ctrEditUsers
+            // ctrUserManagements
             // 
             AutoScaleDimensions = new SizeF(6F, 13F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(layoutControl1);
-            Name = "ctrEditUsers";
+            Name = "ctrUserManagements";
             RightToLeft = RightToLeft.Yes;
             Size = new Size(1166, 631);
             ((System.ComponentModel.ISupportInitialize)layoutControl1).EndInit();

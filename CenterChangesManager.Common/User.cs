@@ -13,7 +13,7 @@ namespace CenterChangesManager.Common
         public string UserName { get; set; }
 
         public string FullName { get; set; }
-        public int Permissions { get; set; }
+        public int Permession { get; set; }
         public string Email { get; set; }
         public bool IsActive { get; set; }
 
@@ -40,7 +40,7 @@ namespace CenterChangesManager.Common
         public bool IsActive { get; set; }
         public string FullName { get; set; }
         public string Email { get; set; }
-        public int Permissions { get; set; }
+        public int Permession { get; set; }
     }
 
     public static class PasswordHasher

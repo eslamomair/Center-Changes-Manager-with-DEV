@@ -50,10 +50,10 @@
             navigationChangeType = new DevExpress.XtraBars.Navigation.NavigationPage();
             ctrChangeTypes1 = new CenterChangesManager.Main.Setting_Control.ctrChangeTypes();
             navigationPageAddUser = new DevExpress.XtraBars.Navigation.NavigationPage();
-            ctrUserManagement1 = new CenterChangesManager.Main.Setting_Control.ctrUserManagement();
+            ctrUserManagement1 = new CenterChangesManager.Main.Setting_Control.ctrAddEditUser();
             navigationPageDeleteUser = new DevExpress.XtraBars.Navigation.NavigationPage();
             navigationPageEditeUser = new DevExpress.XtraBars.Navigation.NavigationPage();
-            ctrEditUsers1 = new CenterChangesManager.Main.Users.ctrEditUsers();
+            ctrEditUsers1 = new CenterChangesManager.Main.Users.ctrUserManagements();
             navigationPageDeleteVariable = new DevExpress.XtraBars.Navigation.NavigationPage();
             navigationPagePermessionUser = new DevExpress.XtraBars.Navigation.NavigationPage();
             pnlHeader = new DevExpress.XtraEditors.PanelControl();
@@ -671,8 +671,8 @@
         private DevExpress.XtraBars.Navigation.NavigationPage navigationPageEditeUser;
         private DevExpress.XtraBars.Navigation.NavigationPage navigationPageDeleteUser;
         private DevExpress.XtraBars.Navigation.NavigationPage navigationPagePermessionUser;
-        private CenterChangesManager.Main.Setting_Control.ctrUserManagement ctrUserManagement1;
-        private CenterChangesManager.Main.Users.ctrEditUsers ctrEditUsers1;
+        private CenterChangesManager.Main.Setting_Control.ctrAddEditUser ctrUserManagement1;
+        private CenterChangesManager.Main.Users.ctrUserManagements ctrEditUsers1;
     }
 }
 
