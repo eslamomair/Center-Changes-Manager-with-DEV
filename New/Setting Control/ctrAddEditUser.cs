@@ -49,7 +49,7 @@ namespace CenterChangesManager.Main.Setting_Control
 
             if (_User == null)
             {
-                clsHelperClass.Error("خطا فى تحميل البيانات ");
+                clsMessageDialogHelper.Error("خطا فى تحميل البيانات ");
                 return;
             }
 
@@ -117,7 +117,7 @@ namespace CenterChangesManager.Main.Setting_Control
             }
             if (!_isUserNameValid)
             {
-                clsHelperClass.ShowMessage("لا يمكن الحفظ، اسم المستخدم غير صالح أو مكرر.", "تنبيه");
+                clsMessageDialogHelper.ShowMessage("لا يمكن الحفظ، اسم المستخدم غير صالح أو مكرر.", "تنبيه");
                 txtUserName.Focus();
                 return;
             }
@@ -174,12 +174,12 @@ namespace CenterChangesManager.Main.Setting_Control
 
             if (await _User.Save())
             {
-                clsHelperClass.Success(" تم حفظ المستخدم بنجاح ");
+                clsMessageDialogHelper.Success(" تم حفظ المستخدم بنجاح ");
                 Mode = enMode.Update;
                 ReseatDefaultValue();
             }
             else
-                clsHelperClass.Error("تعذر حفظ المستخدم");
+                clsMessageDialogHelper.Error("تعذر حفظ المستخدم");
         }
 
         private async void txtUserName_Leave(object sender, EventArgs e)
@@ -206,7 +206,7 @@ namespace CenterChangesManager.Main.Setting_Control
                 txtUserName.Properties.Appearance.BorderColor = Color.Red;
                 txtUserName.Properties.Appearance.Options.UseBorderColor = true;
 
-                clsHelperClass.ShowMessage("عفوا اسم المستخدم موجود من قبل", "تنبيه");
+                clsMessageDialogHelper.ShowMessage("عفوا اسم المستخدم موجود من قبل", "تنبيه");
 
 
                 _isUserNameValid = false;

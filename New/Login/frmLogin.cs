@@ -91,11 +91,11 @@ namespace CenterChangesManager.Main.Login
 
             if (await clsUser.IsAnyUserExistsAsync())
             {
-                clsHelperClass.Error("يجب تسجل المستخدمين  من داخل البرنامج ");
+                clsMessageDialogHelper.Error("يجب تسجل المستخدمين  من داخل البرنامج ");
                 return;
             }
 
-            clsHelperClass.ShowMessage("سيتم انشاء ادمن النظام الان ، الادمن يمتلك جميع صلاحيات النظام ", "تاكيد");
+            clsMessageDialogHelper.ShowMessage("سيتم انشاء ادمن النظام الان ، الادمن يمتلك جميع صلاحيات النظام ", "تاكيد");
 
 
 

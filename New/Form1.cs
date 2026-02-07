@@ -1,5 +1,6 @@
 ﻿using CenterChangesManager.BLL;
 using CenterChangesManager.Main.Login;
+using CenterChangesManager.Main.ReportSetting;
 using DevExpress.XtraBars.FluentDesignSystem;
 using DevExpress.XtraBars.Navigation;
 using DevExpress.XtraEditors;
@@ -148,6 +149,16 @@ namespace CenterChanges
             NavigateToPage(navigationPageEditeUser, "تعديل بيانات  مستخدم ");
 
             ctrEditUsers1.StartControl();
+        }
+
+        private void accordionControlElement15_Click(object sender, EventArgs e)
+        {
+            NavigateToPage(navigationPageReportSetting, "بيانات التقارير  ");
+            ctrReportSettings ctrReport = new ctrReportSettings();
+            ctrReport.Dock = DockStyle.Right;
+            navigationPageReportSetting.Controls.Clear();
+            navigationPageReportSetting.Controls.Add(ctrReport);
+            ctrReport.StartControl(1);
         }
     }
 }

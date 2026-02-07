@@ -51,9 +51,9 @@
             ctrChangeTypes1 = new CenterChangesManager.Main.Setting_Control.ctrChangeTypes();
             navigationPageAddUser = new DevExpress.XtraBars.Navigation.NavigationPage();
             ctrUserManagement1 = new CenterChangesManager.Main.Setting_Control.ctrAddEditUser();
-            navigationPageDeleteUser = new DevExpress.XtraBars.Navigation.NavigationPage();
             navigationPageEditeUser = new DevExpress.XtraBars.Navigation.NavigationPage();
             ctrEditUsers1 = new CenterChangesManager.Main.Users.ctrUserManagements();
+            navigationPageReportSetting = new DevExpress.XtraBars.Navigation.NavigationPage();
             navigationPageDeleteVariable = new DevExpress.XtraBars.Navigation.NavigationPage();
             navigationPagePermessionUser = new DevExpress.XtraBars.Navigation.NavigationPage();
             pnlHeader = new DevExpress.XtraEditors.PanelControl();
@@ -136,13 +136,13 @@
             navigationFrame1.Controls.Add(navigationChangeType);
             navigationFrame1.Controls.Add(navigationPageAddUser);
             navigationFrame1.Controls.Add(navigationPageEditeUser);
-            navigationFrame1.Controls.Add(navigationPageDeleteUser);
+            navigationFrame1.Controls.Add(navigationPageReportSetting);
             navigationFrame1.Controls.Add(navigationPageDeleteVariable);
             navigationFrame1.Controls.Add(navigationPagePermessionUser);
             navigationFrame1.Dock = DockStyle.Fill;
             navigationFrame1.Location = new Point(0, 70);
             navigationFrame1.Name = "navigationFrame1";
-            navigationFrame1.Pages.AddRange(new DevExpress.XtraBars.Navigation.NavigationPageBase[] { navigationPageHome, navigationPageVariablesLog, navigationPageAddVariable, navigationPageEditVariable, navigationPageDeleteVariable, navigationPageAttachments, navigationPageCitcyAndVilage, navigationPageEmployee, navigationChangeType, navigationCompanyInfo, navigationPageAddUser, navigationPageEditeUser, navigationPageDeleteUser, navigationPagePermessionUser });
+            navigationFrame1.Pages.AddRange(new DevExpress.XtraBars.Navigation.NavigationPageBase[] { navigationPageHome, navigationPageVariablesLog, navigationPageAddVariable, navigationPageEditVariable, navigationPageDeleteVariable, navigationPageAttachments, navigationPageCitcyAndVilage, navigationPageEmployee, navigationChangeType, navigationCompanyInfo, navigationPageAddUser, navigationPageEditeUser, navigationPageReportSetting, navigationPagePermessionUser });
             navigationFrame1.SelectedPage = navigationPageHome;
             navigationFrame1.Size = new Size(933, 548);
             navigationFrame1.TabIndex = 1;
@@ -302,11 +302,6 @@
             ctrUserManagement1.Size = new Size(933, 548);
             ctrUserManagement1.TabIndex = 0;
             // 
-            // navigationPageDeleteUser
-            // 
-            navigationPageDeleteUser.Name = "navigationPageDeleteUser";
-            navigationPageDeleteUser.Size = new Size(933, 548);
-            // 
             // navigationPageEditeUser
             // 
             navigationPageEditeUser.Controls.Add(ctrEditUsers1);
@@ -318,8 +313,14 @@
             ctrEditUsers1.Dock = DockStyle.Fill;
             ctrEditUsers1.Location = new Point(0, 0);
             ctrEditUsers1.Name = "ctrEditUsers1";
+            ctrEditUsers1.RightToLeft = RightToLeft.Yes;
             ctrEditUsers1.Size = new Size(933, 548);
             ctrEditUsers1.TabIndex = 0;
+            // 
+            // navigationPageReportSetting
+            // 
+            navigationPageReportSetting.Name = "navigationPageReportSetting";
+            navigationPageReportSetting.Size = new Size(933, 548);
             // 
             // navigationPageDeleteVariable
             // 
@@ -513,6 +514,7 @@
             accordionControlElement15.Name = "accordionControlElement15";
             accordionControlElement15.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
             accordionControlElement15.Text = "اعدادات التقارير";
+            accordionControlElement15.Click += accordionControlElement15_Click;
             // 
             // accordionControlElement12
             // 
@@ -669,7 +671,7 @@
         private DevExpress.XtraBars.Navigation.AccordionControlElement accordionControlElement16;
         private DevExpress.XtraBars.Navigation.AccordionControlElement accordionControlElement14;
         private DevExpress.XtraBars.Navigation.NavigationPage navigationPageEditeUser;
-        private DevExpress.XtraBars.Navigation.NavigationPage navigationPageDeleteUser;
+        private DevExpress.XtraBars.Navigation.NavigationPage navigationPageReportSetting;
         private DevExpress.XtraBars.Navigation.NavigationPage navigationPagePermessionUser;
         private CenterChangesManager.Main.Setting_Control.ctrAddEditUser ctrUserManagement1;
         private CenterChangesManager.Main.Users.ctrUserManagements ctrEditUsers1;

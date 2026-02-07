@@ -56,12 +56,12 @@
             DevExpress.XtraEditors.TileItemElement tileItemElement19 = new DevExpress.XtraEditors.TileItemElement();
             DevExpress.XtraEditors.TileItemElement tileItemElement20 = new DevExpress.XtraEditors.TileItemElement();
             layoutMain = new DevExpress.XtraLayout.LayoutControl();
+            tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
+            simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
+            simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             btnGo = new DevExpress.XtraEditors.SimpleButton();
             txtLng = new DevExpress.XtraEditors.TextEdit();
             txtLat = new DevExpress.XtraEditors.TextEdit();
-            panelControl1 = new DevExpress.XtraEditors.PanelControl();
-            simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
-            simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             chartControl1 = new DevExpress.XtraCharts.ChartControl();
             mapControl1 = new DevExpress.XtraMap.MapControl();
             tileControl1 = new DevExpress.XtraEditors.TileControl();
@@ -75,11 +75,11 @@
             layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             tileItem5 = new DevExpress.XtraEditors.TileItem();
             tileItem1 = new DevExpress.XtraEditors.TileItem();
             tileItem3 = new DevExpress.XtraEditors.TileItem();
@@ -88,10 +88,10 @@
             tileItem4 = new DevExpress.XtraEditors.TileItem();
             ((System.ComponentModel.ISupportInitialize)layoutMain).BeginInit();
             layoutMain.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)tablePanel1).BeginInit();
+            tablePanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)txtLng.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)txtLat.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)panelControl1).BeginInit();
-            panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)chartControl1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)xyDiagram1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)series1).BeginInit();
@@ -101,26 +101,26 @@
             ((System.ComponentModel.ISupportInitialize)layoutControlItem1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem3).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem5).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem6).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem7).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem4).BeginInit();
             SuspendLayout();
             // 
             // layoutMain
             // 
+            layoutMain.Controls.Add(tablePanel1);
             layoutMain.Controls.Add(btnGo);
             layoutMain.Controls.Add(txtLng);
             layoutMain.Controls.Add(txtLat);
-            layoutMain.Controls.Add(panelControl1);
             layoutMain.Controls.Add(chartControl1);
             layoutMain.Controls.Add(mapControl1);
             layoutMain.Controls.Add(tileControl1);
             layoutMain.Dock = DockStyle.Fill;
             layoutMain.Location = new Point(0, 0);
             layoutMain.Name = "layoutMain";
-            layoutMain.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new Rectangle(1168, 386, 650, 400);
+            layoutMain.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new Rectangle(1036, 150, 650, 400);
             layoutMain.OptionsFocus.MoveFocusRightToLeft = true;
             layoutMain.OptionsView.RightToLeftMirroringApplied = true;
             layoutMain.Root = Root;
@@ -128,71 +128,79 @@
             layoutMain.TabIndex = 0;
             layoutMain.Text = "layoutControl1";
             // 
+            // tablePanel1
+            // 
+            tablePanel1.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] { new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 100F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 152F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 20F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 140F) });
+            tablePanel1.Controls.Add(simpleButton2);
+            tablePanel1.Controls.Add(simpleButton1);
+            tablePanel1.Location = new Point(16, 572);
+            tablePanel1.Name = "tablePanel1";
+            tablePanel1.Padding = new Padding(10, 0, 10, 10);
+            tablePanel1.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] { new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 100F) });
+            tablePanel1.Size = new Size(1087, 59);
+            tablePanel1.TabIndex = 7;
+            tablePanel1.UseSkinIndents = true;
+            // 
+            // simpleButton2
+            // 
+            simpleButton2.Appearance.Font = new Font("Cairo", 12F);
+            simpleButton2.Appearance.Options.UseFont = true;
+            tablePanel1.SetColumn(simpleButton2, 1);
+            simpleButton2.ImageOptions.SvgImage = Properties.Resources.chart;
+            simpleButton2.Location = new Point(173, 4);
+            simpleButton2.Name = "simpleButton2";
+            tablePanel1.SetRow(simpleButton2, 0);
+            simpleButton2.Size = new Size(146, 41);
+            simpleButton2.TabIndex = 1;
+            simpleButton2.Text = "تصدير التقارير";
+            // 
+            // simpleButton1
+            // 
+            simpleButton1.Appearance.Font = new Font("Cairo", 12F);
+            simpleButton1.Appearance.Options.UseFont = true;
+            tablePanel1.SetColumn(simpleButton1, 3);
+            simpleButton1.ImageOptions.SvgImage = Properties.Resources.printtitles;
+            simpleButton1.Location = new Point(13, 4);
+            simpleButton1.Name = "simpleButton1";
+            tablePanel1.SetRow(simpleButton1, 0);
+            simpleButton1.Size = new Size(134, 41);
+            simpleButton1.TabIndex = 0;
+            simpleButton1.Text = "طباعة";
+            // 
             // btnGo
             // 
             btnGo.Appearance.Font = new Font("Segoe UI", 15F);
             btnGo.Appearance.Options.UseFont = true;
-            btnGo.Location = new Point(41, 114);
+            btnGo.Location = new Point(50, 101);
             btnGo.Margin = new Padding(6);
             btnGo.Name = "btnGo";
-            btnGo.Size = new Size(118, 35);
+            btnGo.Size = new Size(117, 35);
             btnGo.StyleController = layoutMain;
-            btnGo.TabIndex = 7;
+            btnGo.TabIndex = 5;
             btnGo.Text = "بحث";
             btnGo.Click += btnGo_Click;
             // 
             // txtLng
             // 
-            txtLng.Location = new Point(165, 114);
+            txtLng.Location = new Point(173, 101);
             txtLng.Margin = new Padding(6);
             txtLng.Name = "txtLng";
             txtLng.Properties.Appearance.Font = new Font("Segoe UI", 12F);
             txtLng.Properties.Appearance.Options.UseFont = true;
-            txtLng.Size = new Size(181, 36);
+            txtLng.Size = new Size(179, 36);
             txtLng.StyleController = layoutMain;
-            txtLng.TabIndex = 6;
+            txtLng.TabIndex = 4;
             // 
             // txtLat
             // 
-            txtLat.Location = new Point(352, 114);
+            txtLat.Location = new Point(358, 101);
             txtLat.Margin = new Padding(6);
             txtLat.Name = "txtLat";
             txtLat.Properties.Appearance.Font = new Font("Segoe UI", 12F);
             txtLat.Properties.Appearance.Options.UseFont = true;
-            txtLat.Size = new Size(204, 36);
+            txtLat.Size = new Size(202, 36);
             txtLat.StyleController = layoutMain;
-            txtLat.TabIndex = 5;
-            // 
-            // panelControl1
-            // 
-            panelControl1.Controls.Add(simpleButton2);
-            panelControl1.Controls.Add(simpleButton1);
-            panelControl1.Location = new Point(16, 572);
-            panelControl1.Name = "panelControl1";
-            panelControl1.Size = new Size(1087, 59);
-            panelControl1.TabIndex = 4;
-            // 
-            // simpleButton2
-            // 
-            simpleButton2.Dock = DockStyle.Left;
-            simpleButton2.Location = new Point(141, 2);
-            simpleButton2.Margin = new Padding(10);
-            simpleButton2.Name = "simpleButton2";
-            simpleButton2.Padding = new Padding(10);
-            simpleButton2.Size = new Size(139, 55);
-            simpleButton2.TabIndex = 1;
-            simpleButton2.Text = "simpleButton2";
-            // 
-            // simpleButton1
-            // 
-            simpleButton1.Dock = DockStyle.Left;
-            simpleButton1.Location = new Point(2, 2);
-            simpleButton1.Margin = new Padding(10);
-            simpleButton1.Name = "simpleButton1";
-            simpleButton1.Padding = new Padding(10);
-            simpleButton1.Size = new Size(139, 55);
-            simpleButton1.TabIndex = 0;
-            simpleButton1.Text = "simpleButton1";
+            txtLat.TabIndex = 3;
             // 
             // chartControl1
             // 
@@ -201,7 +209,7 @@
             xyDiagram1.AxisY.VisibleInPanesSerializable = "-1";
             xyDiagram1.Rotated = true;
             chartControl1.Diagram = xyDiagram1;
-            chartControl1.Location = new Point(562, 114);
+            chartControl1.Location = new Point(566, 101);
             chartControl1.Name = "chartControl1";
             series1.Name = "Series 1";
             series1.SeriesID = 4;
@@ -218,7 +226,7 @@
     {
     series1
     };
-            chartControl1.Size = new Size(541, 452);
+            chartControl1.Size = new Size(537, 465);
             chartControl1.TabIndex = 2;
             chartTitle1.Text = "رسم بيانى لاعداد المتغيرات ";
             chartTitle1.TitleID = 0;
@@ -226,12 +234,12 @@
             // 
             // mapControl1
             // 
-            mapControl1.Location = new Point(16, 156);
+            mapControl1.Location = new Point(16, 143);
             mapControl1.Name = "mapControl1";
             mapControl1.NavigationPanelOptions.CoordinatesStyle.Font = new Font("Tahoma", 8.25F);
             mapControl1.NavigationPanelOptions.ScaleStyle.Font = new Font("Tahoma", 8.25F);
-            mapControl1.Size = new Size(540, 410);
-            mapControl1.TabIndex = 3;
+            mapControl1.Size = new Size(544, 423);
+            mapControl1.TabIndex = 6;
             mapControl1.MouseClick += mapControl1_MouseClick;
             // 
             // tileControl1
@@ -242,7 +250,7 @@
             tileControl1.MaxId = 13;
             tileControl1.Name = "tileControl1";
             tileControl1.RowCount = 1;
-            tileControl1.Size = new Size(1087, 92);
+            tileControl1.Size = new Size(1087, 79);
             tileControl1.TabIndex = 0;
             tileControl1.Text = "tileControl1";
             // 
@@ -325,7 +333,7 @@
             Root.CustomizationFormText = "Root";
             Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             Root.GroupBordersVisible = false;
-            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1, layoutControlItem2, layoutControlItem3, layoutControlItem4, emptySpaceItem1, layoutControlItem5, layoutControlItem6, layoutControlItem7 });
+            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1, layoutControlItem2, layoutControlItem3, emptySpaceItem1, layoutControlItem5, layoutControlItem6, layoutControlItem7, layoutControlItem4 });
             Root.Name = "Root";
             Root.Size = new Size(1119, 647);
             Root.TextVisible = false;
@@ -337,7 +345,7 @@
             layoutControlItem1.CustomizationFormText = "layoutControlItem1";
             layoutControlItem1.Location = new Point(0, 0);
             layoutControlItem1.Name = "layoutControlItem1";
-            layoutControlItem1.Size = new Size(1093, 98);
+            layoutControlItem1.Size = new Size(1093, 85);
             layoutControlItem1.TextLocation = DevExpress.Utils.Locations.Top;
             layoutControlItem1.TextVisible = false;
             // 
@@ -346,9 +354,9 @@
             layoutControlItem2.Control = mapControl1;
             layoutControlItem2.ControlAlignment = ContentAlignment.TopRight;
             layoutControlItem2.CustomizationFormText = "layoutControlItem2";
-            layoutControlItem2.Location = new Point(0, 140);
+            layoutControlItem2.Location = new Point(0, 127);
             layoutControlItem2.Name = "layoutControlItem2";
-            layoutControlItem2.Size = new Size(546, 416);
+            layoutControlItem2.Size = new Size(550, 429);
             layoutControlItem2.TextVisible = false;
             // 
             // layoutControlItem3
@@ -356,26 +364,16 @@
             layoutControlItem3.Control = chartControl1;
             layoutControlItem3.ControlAlignment = ContentAlignment.TopRight;
             layoutControlItem3.CustomizationFormText = "layoutControlItem3";
-            layoutControlItem3.Location = new Point(546, 98);
+            layoutControlItem3.Location = new Point(550, 85);
             layoutControlItem3.Name = "layoutControlItem3";
-            layoutControlItem3.Size = new Size(547, 458);
+            layoutControlItem3.Size = new Size(543, 471);
             layoutControlItem3.TextVisible = false;
-            // 
-            // layoutControlItem4
-            // 
-            layoutControlItem4.Control = panelControl1;
-            layoutControlItem4.ControlAlignment = ContentAlignment.TopRight;
-            layoutControlItem4.CustomizationFormText = "layoutControlItem4";
-            layoutControlItem4.Location = new Point(0, 556);
-            layoutControlItem4.Name = "layoutControlItem4";
-            layoutControlItem4.Size = new Size(1093, 65);
-            layoutControlItem4.TextVisible = false;
             // 
             // emptySpaceItem1
             // 
-            emptySpaceItem1.Location = new Point(0, 98);
+            emptySpaceItem1.Location = new Point(0, 85);
             emptySpaceItem1.Name = "emptySpaceItem1";
-            emptySpaceItem1.Size = new Size(25, 42);
+            emptySpaceItem1.Size = new Size(34, 42);
             // 
             // layoutControlItem5
             // 
@@ -384,9 +382,9 @@
             layoutControlItem5.AppearanceItemCaptionDisabled.Font = new Font("Segoe UI", 12F);
             layoutControlItem5.AppearanceItemCaptionDisabled.Options.UseFont = true;
             layoutControlItem5.Control = txtLat;
-            layoutControlItem5.Location = new Point(336, 98);
+            layoutControlItem5.Location = new Point(342, 85);
             layoutControlItem5.Name = "layoutControlItem5";
-            layoutControlItem5.Size = new Size(210, 42);
+            layoutControlItem5.Size = new Size(208, 42);
             layoutControlItem5.TextVisible = false;
             // 
             // layoutControlItem6
@@ -396,18 +394,26 @@
             layoutControlItem6.AppearanceItemCaptionDisabled.Font = new Font("Segoe UI", 12F);
             layoutControlItem6.AppearanceItemCaptionDisabled.Options.UseFont = true;
             layoutControlItem6.Control = txtLng;
-            layoutControlItem6.Location = new Point(149, 98);
+            layoutControlItem6.Location = new Point(157, 85);
             layoutControlItem6.Name = "layoutControlItem6";
-            layoutControlItem6.Size = new Size(187, 42);
+            layoutControlItem6.Size = new Size(185, 42);
             layoutControlItem6.TextVisible = false;
             // 
             // layoutControlItem7
             // 
             layoutControlItem7.Control = btnGo;
-            layoutControlItem7.Location = new Point(25, 98);
+            layoutControlItem7.Location = new Point(34, 85);
             layoutControlItem7.Name = "layoutControlItem7";
-            layoutControlItem7.Size = new Size(124, 42);
+            layoutControlItem7.Size = new Size(123, 42);
             layoutControlItem7.TextVisible = false;
+            // 
+            // layoutControlItem4
+            // 
+            layoutControlItem4.Control = tablePanel1;
+            layoutControlItem4.Location = new Point(0, 556);
+            layoutControlItem4.Name = "layoutControlItem4";
+            layoutControlItem4.Size = new Size(1093, 65);
+            layoutControlItem4.TextVisible = false;
             // 
             // tileItem5
             // 
@@ -575,10 +581,10 @@
             Size = new Size(1119, 647);
             ((System.ComponentModel.ISupportInitialize)layoutMain).EndInit();
             layoutMain.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)tablePanel1).EndInit();
+            tablePanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)txtLng.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)txtLat.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)panelControl1).EndInit();
-            panelControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)xyDiagram1).EndInit();
             ((System.ComponentModel.ISupportInitialize)sideBySideBarSeriesView1).EndInit();
             ((System.ComponentModel.ISupportInitialize)series1).EndInit();
@@ -588,11 +594,11 @@
             ((System.ComponentModel.ISupportInitialize)layoutControlItem1).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem2).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem3).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem4).EndInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem1).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem5).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem6).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem7).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem4).EndInit();
             ResumeLayout(false);
         }
 
@@ -613,9 +619,6 @@
         private DevExpress.XtraEditors.TileItem tileItem6;
         private DevExpress.XtraEditors.TileItem tileItem8;
         private DevExpress.XtraEditors.TileItem tileItem4;
-        private DevExpress.XtraEditors.PanelControl panelControl1;
-        private DevExpress.XtraEditors.SimpleButton simpleButton2;
-        private DevExpress.XtraEditors.SimpleButton simpleButton1;
         private DevExpress.XtraCharts.ChartControl chartControl1;
         private DevExpress.XtraMap.MapControl mapControl1;
         private DevExpress.XtraEditors.SimpleButton btnGo;
@@ -624,10 +627,13 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem7;
+        private DevExpress.Utils.Layout.TablePanel tablePanel1;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
+        private DevExpress.XtraEditors.SimpleButton simpleButton2;
+        private DevExpress.XtraEditors.SimpleButton simpleButton1;
     }
 }

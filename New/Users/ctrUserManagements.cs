@@ -48,11 +48,11 @@ namespace CenterChangesManager.Main.Users
             else if (tag == "Delete")
             {
 
-                if (clsHelperClass.Confirm("هل انت متاكد من حذف هذا المستخدم "))
+                if (clsMessageDialogHelper.Confirm("هل انت متاكد من حذف هذا المستخدم "))
                 {
                     int userId = Convert.ToInt32(view.GetRowCellValue(rowHandel, "UserData.UserID"));
                     clsUser.DeleteAsync(userId);
-                    clsHelperClass.Success("تم حذف المستخدم بنجاح");
+                    clsMessageDialogHelper.Success("تم حذف المستخدم بنجاح");
                     FillDataGrid();
                 }
 

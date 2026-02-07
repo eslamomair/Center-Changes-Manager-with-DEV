@@ -81,12 +81,42 @@ namespace CenterChangesManager.Main.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type DevExpress.Utils.Svg.SvgImage.
+        /// </summary>
+        internal static DevExpress.Utils.Svg.SvgImage bo_report {
+            get {
+                object obj = ResourceManager.GetObject("bo_report", resourceCulture);
+                return ((DevExpress.Utils.Svg.SvgImage)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap cancel_32x32 {
             get {
                 object obj = ResourceManager.GetObject("cancel_32x32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type DevExpress.Utils.Svg.SvgImage.
+        /// </summary>
+        internal static DevExpress.Utils.Svg.SvgImage chart {
+            get {
+                object obj = ResourceManager.GetObject("chart", resourceCulture);
+                return ((DevExpress.Utils.Svg.SvgImage)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type DevExpress.Utils.Svg.SvgImage.
+        /// </summary>
+        internal static DevExpress.Utils.Svg.SvgImage charttype_bar3dstacked {
+            get {
+                object obj = ResourceManager.GetObject("charttype_bar3dstacked", resourceCulture);
+                return ((DevExpress.Utils.Svg.SvgImage)(obj));
             }
         }
         
@@ -197,6 +227,26 @@ namespace CenterChangesManager.Main.Properties {
             get {
                 object obj = ResourceManager.GetObject("iconsetarrows5_32x32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type DevExpress.Utils.Svg.SvgImage.
+        /// </summary>
+        internal static DevExpress.Utils.Svg.SvgImage printarea {
+            get {
+                object obj = ResourceManager.GetObject("printarea", resourceCulture);
+                return ((DevExpress.Utils.Svg.SvgImage)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type DevExpress.Utils.Svg.SvgImage.
+        /// </summary>
+        internal static DevExpress.Utils.Svg.SvgImage printtitles {
+            get {
+                object obj = ResourceManager.GetObject("printtitles", resourceCulture);
+                return ((DevExpress.Utils.Svg.SvgImage)(obj));
             }
         }
         

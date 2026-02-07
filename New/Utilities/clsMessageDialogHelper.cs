@@ -2,7 +2,7 @@
 
 namespace CenterChangesManager.Main.Utilities
 {
-    public static class clsHelperClass
+    public static class clsMessageDialogHelper
     {
 
         public static void Success(string message)
